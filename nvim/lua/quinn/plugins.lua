@@ -52,6 +52,7 @@ local plugins = {
     dependencies ='nvim-treesitter',
   },
   'nvim-treesitter/nvim-treesitter-context',
+  'numToStr/FTerm.nvim',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
