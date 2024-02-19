@@ -18,8 +18,7 @@ return {
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
-
-    -- Use LspAttach autocommand to only map the following keys
+    -- Keymap for normal mode, enter opens float
     -- after the language server attaches to the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP actions",
