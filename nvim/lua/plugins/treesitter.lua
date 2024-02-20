@@ -21,6 +21,7 @@ return {
         "markdown",
         "markdown_inline",
         "javascript",
+        "tree-sitter-astro"
       },
       auto_install = true,
       sync_install = false,
@@ -86,5 +87,7 @@ return {
         },
       },
     })
+    local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
+    ft_to_parser.mdx = "markdown_inline"
   end,
 }
