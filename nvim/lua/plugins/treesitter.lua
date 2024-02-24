@@ -21,7 +21,6 @@ return {
         "markdown",
         "markdown_inline",
         "javascript",
-        "tree-sitter-astro"
       },
       auto_install = true,
       sync_install = false,
