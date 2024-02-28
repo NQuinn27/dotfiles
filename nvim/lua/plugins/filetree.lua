@@ -11,5 +11,7 @@ return {
 		vim.keymap.set("n", "<leader>]", ":Neotree toggle<CR>", {})
 		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
 		vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
+		-- vim.g.loaded_netrwPlugin = 1
+		-- vim.g.loaded_netrw = 1
 	end,
 }
