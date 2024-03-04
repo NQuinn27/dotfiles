@@ -20,7 +20,7 @@ return {
         return title
       end,
     })
-    vim.opt.conceallevel = 1
+    -- vim.opt.conceallevel = 1
     vim.keymap.set("n", "gf", function()
       if require("obsidian").util.cursor_on_markdown_link() then
         return "<cmd>ObsidianFollowLink<CR>"
