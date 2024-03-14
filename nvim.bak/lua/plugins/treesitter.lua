@@ -86,8 +86,7 @@ return {
         },
       },
     })
-    -- local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
-    -- ft_to_parser.mdx = "markdown_inline"
     vim.treesitter.language.register('markdown_inline', 'mdx')
+    vim.treesitter.language.register('markdown', 'md')
   end,
 }
