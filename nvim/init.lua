@@ -5,6 +5,7 @@ require("lazy").setup("plugins")
 
 local TERMCS = os.getenv("TERMCS")
 
+vim.g.mapleader = " "
 local background
 if TERMCS == "light" then
     background = "light"

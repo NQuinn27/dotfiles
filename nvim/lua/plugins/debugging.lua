@@ -1,12 +1,18 @@
 return {
+	{
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"suketa/nvim-dap-ruby",
 		"leoluz/nvim-dap-go",
 	},
-
-	config = function()
+	keys = {
+		{ "<leader>dt", "dap.toggle_breakpoint()", desc = "Toggle breakpoint" },
+		{ "<Leader>dx", ":DapTerminate<CR>", desc = "Terminate" },
+		{ "<Leader>do", ":DapStepOver<CR>", desc = "Step over" },
+		{ "<leader>dc", "dap.continue()", desc = "Continue" },
+	},
+	opts = function()
 		local dap, dapui = require("dap"), require("dapui")
 		require("dapui").setup()
 		dap.listeners.before.attach.dapui_config = function()
@@ -27,10 +33,16 @@ return {
 
 		-- Go
 		require("dap-go").setup()
-
-		vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
-		vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
-		vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
-		vim.keymap.set("n", "<leader>dc", dap.continue, {})
 	end,
+},
+	-- which key integration
+	{
+		"folke/which-key.nvim",
+		optional = true,
+		opts = {
+			defaults = {
+				["<leader>d"] = { name = "+debug" },
+			},
+		},
+	}
 }
