@@ -118,6 +118,9 @@ alias vim="nvim"
 alias vi="nvim"
 alias ls="eza"
 alias piru="pod install --repo-update"
+alias greset="git reset --hard HEAD"
+alias gclean="git clean -fd"
+alias gpum="git fetch --all;git pull origin master"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . ~/.asdf/plugins/java/set-java-home.zsh
