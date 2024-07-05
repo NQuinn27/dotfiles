@@ -1,0 +1,20 @@
+-- local lspconfig = require("lspconfig")
+--
+-- lspconfig.sourcekit.setup({
+--   cmd = {
+--     "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+--   },
+--   settings = {
+--     sourcekit = {
+--       toolchain = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain",
+--       buildFlags = {
+--         "-sdk",
+--         "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+--       },
+--     },
+--   },
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
+--
+-- return {}
