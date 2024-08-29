@@ -15,7 +15,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git)
 
@@ -69,9 +68,6 @@ alias ls="eza"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . ~/.asdf/plugins/java/set-java-home.zsh
+. ~/.asdf/plugins/golang/set-env.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/Config/dotfiles/.p10k.zsh.
-[[ ! -f ~/Config/dotfiles/.p10k.zsh ]] || source ~/Config/dotfiles/.p10k.zsh
+eval "$(starship init zsh)"
