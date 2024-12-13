@@ -112,7 +112,7 @@ return {
 		-- Auto setup for servers
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
-			ensure_installed = { "tsserver" },
+			ensure_installed = { "ts_ls" },
 			handlers = {
 				default_setup,
 				yamlls = function()
