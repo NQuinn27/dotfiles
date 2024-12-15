@@ -6,52 +6,36 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 fcd() {
   local dir
   dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
 }
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
 alias zshconfig="vim ~/.zshrc"
 
 plugins=(git macos brew)
-export ANDROID_HOME=/usr/local/opt/android-sdk
+
+
+source $ZSH/oh-my-zsh.sh
+
+
+export ANDROID_HOME=/Users/niallquinn/Library/Android/sdk
 export EDITOR="vim"
 
-# ZSH iterm word jump
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-bindkey "^[a" beginning-of-line
-bindkey "^[e" end-of-line
-
 export PATH="/usr/local/bin:/Users/niall/.local/bin:$PATH"
-export GOPATH=$HOME/code/go
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/build-tools/35.0.0
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
@@ -67,11 +51,16 @@ alias gpum="git fetch --all;git pull origin master"
 alias cat="bat"
 alias ls="eza"
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 . ~/.asdf/plugins/java/set-java-home.zsh
+. ~/.asdf/plugins/golang/set-env.zsh
 
+eval $(/opt/homebrew/bin/brew shellenv)
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# Created by `pipx` on 2024-10-08 10:16:16
+export PATH="$PATH:/Users/niallquinn/.local/bin"
+set -o allexport; source .env; set +o allexport
+
+bindkey -s ^f "tmux-sessionizer\n"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/Config/dotfiles/.p10k.zsh.
-[[ ! -f ~/Config/dotfiles/.p10k.zsh ]] || source ~/Config/dotfiles/.p10k.zsh

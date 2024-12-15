@@ -7,8 +7,6 @@ return {
   },
   cmd = { "ChatGPT", "ChatGPTRun", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
   config = function()
-    require("chatgpt").setup({
-      api_key_cmd = "op read op://Personal/openAINvim/password --no-newline"
-    })
+    require("chatgpt").setup()
   end
 }
