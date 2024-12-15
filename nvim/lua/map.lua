@@ -39,20 +39,4 @@ vim.keymap.set("n", "t<C-g>", vim.cmd.TestVisit, { noremap = true, silent = true
 vim.keymap.set("n", "<leader>j", "<C-w>R")
 vim.keymap.set("n", "<leader>k", "<C-w>L")
 
-vim.opt.guicursor = ""
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-
-vim.opt.smartindent = true
-
-vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "100"
-
 vim.keymap.set("n", "<leader>mdp", vim.cmd.MarkdownPreview, { noremap = true, silent = true })
