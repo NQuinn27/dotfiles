@@ -112,7 +112,7 @@ return {
 		-- Auto setup for servers
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
-			ensure_installed = { "ts_ls" },
+			ensure_installed = { "ts_ls", "lua_ls", "pyright", "yamlls" },
 			handlers = {
 				default_setup,
 				yamlls = function()
@@ -125,6 +125,16 @@ return {
 					})
 				end,
 			},
+		})
+
+		lspconfig.lua_ls.setup({
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+				}
+			}
 		})
 
 		lspconfig.sourcekit.setup({

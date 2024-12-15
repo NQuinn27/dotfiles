@@ -9,6 +9,7 @@ vim.g.maplocalleader = " "
 -- See `:help vim.keymap.set()
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
+vim.keymap.set("n", "-", vim.cmd.Explore)
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Remap for dealing with word wrap

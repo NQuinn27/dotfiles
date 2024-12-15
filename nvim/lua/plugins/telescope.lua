@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
+		"nvim-telescope/telescope-file-browser.nvim",
 	},
 	config = function()
 		require("telescope").setup({
@@ -28,6 +29,19 @@ return {
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown({}),
+				},
+				file_browser = {
+					theme = "ivy",
+					-- disables netrw and use telescope-file-browser in its place
+					hijack_netrw = true,
+					mappings = {
+						["i"] = {
+							-- your custom insert mode mappings
+						},
+						["n"] = {
+							-- your custom normal mode mappings
+						},
+					},
 				},
 			},
 		})
@@ -57,7 +71,7 @@ return {
 		vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, { desc = "[C-p] Find git files" })
 
-		--[[ 	 ]]	-- Git related searches
+		--[[ 	 ]] -- Git related searches
 		vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, { desc = "[G]it [C]ommits" })
 		vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_branches, { desc = "[G]it [B]ranches" })
 		vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status, { desc = "[G]it [S]tatus" })
@@ -71,6 +85,11 @@ return {
 
 		-- Resume last search
 		vim.keymap.set("n", "<leader>sl", require("telescope.builtin").resume, { desc = "[S]earch [L]ast" })
+
+		-- File browser
+		vim.keymap.set("n", "<leader>fb", function()
+			require("telescope").extensions.file_browser.file_browser()
+		end, { desc = "[F]ile [B]rowser" })
 
 		-- Find all files (including hidden ones, but excluding .git)
 		vim.keymap.set("n", "<leader>sa", function()

@@ -3,7 +3,7 @@ require("set")
 require("map")
 require("lazy").setup("plugins")
 
-local TERMCS = os.getenv("TERMCS")
+-- local TERMCS = os.getenv("TERMCS")
 
 vim.g.mapleader = " "
 -- local background
