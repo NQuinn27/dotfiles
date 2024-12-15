@@ -24,7 +24,7 @@ fcd() {
 
 alias zshconfig="vim ~/.zshrc"
 
-plugins=(git macos brew)
+plugins=(git macos brew zsh-syntax-highlighting zsh-autosuggestions)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -58,9 +58,11 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # Created by `pipx` on 2024-10-08 10:16:16
-export PATH="$PATH:/Users/niallquinn/.local/bin"
-set -o allexport; source .env; set +o allexport
+export PATH="$PATH:/Users/niall/.local/bin"
+export PATH="$PATH:/Users/niall/.local/scripts"
+set -o allexport; source ~/.env; set +o allexport
 
 bindkey -s ^f "tmux-sessionizer\n"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

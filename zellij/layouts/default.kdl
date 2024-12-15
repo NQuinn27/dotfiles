@@ -1,0 +1,4 @@
+layout {
+    tab name="editor" 
+    tab name="terminal"
+}
