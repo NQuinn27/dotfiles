@@ -58,8 +58,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # Created by `pipx` on 2024-10-08 10:16:16
-export PATH="$PATH:/Users/niall/.local/bin"
-export PATH="$PATH:/Users/niall/.local/scripts"
+export PATH="$PATH:/Users/niallquinn/.local/bin"
 set -o allexport; source ~/.env; set +o allexport
 
 bindkey -s ^f "tmux-sessionizer\n"
