@@ -13,6 +13,8 @@ return {
 	-- 		-- close_if_last_window = true,
 	-- 		window = {
 	-- 			position = "left",
+	-- 			auto_close = true,
+	-- 			auto_open = false,
 	-- 		},
 	-- 	})
 	-- 	vim.keymap.set("n", "<leader>]", ":Neotree toggle<CR>", {})

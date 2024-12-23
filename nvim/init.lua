@@ -4,7 +4,6 @@ require("map")
 require("lazy").setup("plugins")
 
 -- local TERMCS = os.getenv("TERMCS")
-vim.cmd("language en_US")
 vim.g.mapleader = " "
 -- local background
 -- if TERMCS == "light" then
