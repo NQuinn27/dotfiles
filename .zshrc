@@ -24,7 +24,7 @@ fcd() {
 
 alias zshconfig="vim ~/.zshrc"
 
-plugins=(git macos brew zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git macos brew) 
 
 
 source $ZSH/oh-my-zsh.sh
@@ -64,4 +64,3 @@ set -o allexport; source ~/.env; set +o allexport
 bindkey -s ^f "tmux-sessionizer\n"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

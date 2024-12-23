@@ -78,3 +78,10 @@ vim.filetype.add({
 		mdx = "mdx",
 	},
 })
+
+-- Enable tree view in netrw
+vim.g.netrw_liststyle = 3
+-- Disable netrw banner
+-- vim.g.netrw_banner = 0
+
+

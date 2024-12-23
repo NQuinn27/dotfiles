@@ -92,7 +92,6 @@ return {
 			require("dap-go").setup()
 
 			-- Codelldb
-			local xcodebuild = require("xcodebuild.integrations.dap")
 			local codelldbPath = os.getenv("HOME") .. "/tools/codelldb-darwin-arm64/extension/adapter/codelldb"
 
 			require("xcodebuild.integrations.dap").setup(codelldbPath)
