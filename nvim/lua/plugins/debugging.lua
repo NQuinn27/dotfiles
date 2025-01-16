@@ -6,6 +6,7 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"suketa/nvim-dap-ruby",
 			"leoluz/nvim-dap-go",
+            "julianolf/nvim-dap-lldb",
 			"wojciech-kulik/xcodebuild.nvim",
 		},
 		keys = {
@@ -95,6 +96,8 @@ return {
 			local codelldbPath = os.getenv("HOME") .. "/tools/codelldb-darwin-arm64/extension/adapter/codelldb"
 
 			require("xcodebuild.integrations.dap").setup(codelldbPath)
+
+            require("dap-lldb").setup()
 		end,
 	},
 	-- which key integration
