@@ -30,7 +30,7 @@ vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "88"
 -- Set highlight on search
 vim.o.hlsearch = true
 vim.keymap.set("n", "<esc>", ":noh<CR>")
@@ -83,5 +83,3 @@ vim.filetype.add({
 vim.g.netrw_liststyle = 3
 -- Disable netrw banner
 -- vim.g.netrw_banner = 0
-
-
