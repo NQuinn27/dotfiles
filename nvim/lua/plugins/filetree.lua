@@ -10,15 +10,15 @@ return {
     },
     config = function()
         require("neo-tree").setup({
-            -- close_if_last_window = true,
+            close_if_last_window = true,
             window = {
                 position = "left",
-                auto_close = true,
                 auto_open = false,
+                auto_close = true,
             },
         })
-        vim.keymap.set("n", "<leader>]", ":Neotree toggle<CR>", {})
-        vim.keymap.set("n", "<leader>[", ":Neotree toggle reveal float<CR>", {})
+        vim.keymap.set("n", "<leader>]", ":Neotree toggle left<CR>", {})
+        vim.keymap.set("n", "<leader>[", ":Neotree toggle float<CR>", {})
         vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
         vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
     end,
