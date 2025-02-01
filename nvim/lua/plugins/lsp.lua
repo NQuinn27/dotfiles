@@ -53,7 +53,7 @@ return {
         -- Auto setup for servers
         require("mason").setup({})
         require("mason-lspconfig").setup({
-            ensure_installed = { "ts_ls", "lua_ls", "pyright", "yamlls", "gopls" },
+            ensure_installed = { "ts_ls", "lua_ls", "pyright", "yamlls", "gopls", "cucumber_language_server" },
             handlers = {
                 default_setup,
                 yamlls = function()
@@ -93,6 +93,16 @@ return {
             },
             capabilities = capabilities,
             on_attach = on_attach,
+        })
+
+        lspconfig.cucumber_language_server.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            cmd = { "cucumber-language-server", "--stdio" },
+            runtime = {
+                version = "0.0.1",
+                path = "cucumber-language-server",
+            },
         })
 
         lspconfig.gopls.setup(

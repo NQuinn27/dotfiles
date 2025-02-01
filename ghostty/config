@@ -1,1 +1,8 @@
-/Users/niallquinn/config/dotfiles/ghostty/config
+theme=catppuccin-mocha 
+font-family="FiraCode Nerd Font Mono"
+font-size=14.0
+
+window-width=800
+window-height=600
+
+bold-is-bright=true

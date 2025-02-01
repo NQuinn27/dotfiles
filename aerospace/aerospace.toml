@@ -14,7 +14,7 @@ after-startup-command = ['exec-and-forget sketchybar']
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
 # Start AeroSpace at login
-start-at-login = true
+start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -62,7 +62,7 @@ inner.horizontal = 4
 inner.vertical =   4
 outer.left =       4  # This is a constant value
 outer.bottom =     4
-outer.top =        4
+outer.top =        40
 outer.right =      4
 
 # 'main' binding mode declaration
