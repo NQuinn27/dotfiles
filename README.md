@@ -1,6 +1,7 @@
 # dotfiles
 
 My Dotfiles
+
 This repo contains dotfiles and scripts to get up and running on a new mac/keep macs in sync.
 
 What is not in this repo:
