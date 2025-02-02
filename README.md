@@ -12,7 +12,7 @@ What is not in this repo:
 ## Installation
 
 - Clone this repo somewhere, eg `~/Config`
-- Run ./install.sh
+- Ensure `./sessionizer-projects`, `~/.chsh-languages` and `~/.chsh-utils` are present
+- Run `./install.sh`
 - Verify output/symlinks are correct
-- Ensure ./sessionizer-projects, ~/.chsh-languages and ~/.chsh-utils are present
 - Manually add env files for sensitive keys
