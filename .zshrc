@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -26,11 +23,9 @@ alias zshconfig="vim ~/.zshrc"
 
 plugins=(git macos brew) 
 
-
 source $ZSH/oh-my-zsh.sh
 
-
-export ANDROID_HOME=/Users/niallquinn/Library/Android/sdk
+export ANDROID_HOME=$HOME/Library/Android/sdk
 export EDITOR="vim"
 
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
@@ -59,6 +54,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # Created by `pipx` on 2024-10-08 10:16:16
 export PATH="$PATH:$HOME/.local/scripts"
+# .env integration
 set -o allexport; source ~/.env; set +o allexport
 
 bindkey -s ^f "tmux-sessionizer\n"
