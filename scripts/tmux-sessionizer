@@ -1,9 +1,24 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
+
+# Read directories from ~/.sessionizer-projects and expand ~ to $HOME
+project_dirs=()
+while IFS= read -r line; do
+    # Expand ~ to $HOME
+    expanded_line="${line/#\~/$HOME}"
+    project_dirs+=("$expanded_line")
+done < ~/.sessionizer-projects
+
+# Check if the file is empty or missing
+if [[ ${#project_dirs[@]} -eq 0 ]]; then
+    echo "Error: ~/.sessionizer-projects file not found or empty."
+    exit 1
+fi
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Config ~/code ~/code/ios ~/code/web ~/code/backend ~/personal/go ~/personal/interpreter-book -mindepth 1 -maxdepth 1 -type d | fzf)
+    # Use find with dynamically loaded directories
+    selected=$(find "${project_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -14,16 +29,16 @@ selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+    tmux new-session -s "$selected_name" -c "$selected"
     exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
 if [[ -z $TMUX ]]; then
-    tmux attach -t $selected_name
+    tmux attach -t "$selected_name"
 else
-    tmux switch-client -t $selected_name
+    tmux switch-client -t "$selected_name"
 fi
