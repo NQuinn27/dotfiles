@@ -33,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 export ANDROID_HOME=/Users/niallquinn/Library/Android/sdk
 export EDITOR="vim"
 
-export PATH="/usr/local/bin:/Users/niall/.local/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/build-tools/35.0.0
 
@@ -58,7 +58,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # Created by `pipx` on 2024-10-08 10:16:16
-export PATH="$PATH:/Users/niallquinn/.local/bin"
+export PATH="$PATH:$HOME/.local/scripts"
 set -o allexport; source ~/.env; set +o allexport
 
 bindkey -s ^f "tmux-sessionizer\n"
