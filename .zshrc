@@ -45,6 +45,9 @@ alias gclean="git clean -fd"
 alias gpum="git fetch --all;git pull origin master"
 alias cat="bat"
 alias ls="eza"
+alias cr="cargo run"
+alias ct="cargo test"
+alias cb="cargo build"
 
 . ~/.asdf/plugins/java/set-java-home.zsh
 . ~/.asdf/plugins/golang/set-env.zsh
