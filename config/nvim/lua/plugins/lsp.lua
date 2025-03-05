@@ -11,10 +11,10 @@ return {
 		lspconfig.lua_ls.setup({})
 		-- Global mappings.
 		-- See `:help vim.diagnostic.*` for documentation on any of the below functions
-		vim.keymap.set("n", "<leader>D", vim.diagnostic.open_float)
+		vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-		vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+		vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics Set loclist" })
 		-- Keymap for normal mode, enter opens float
 		-- after the language server attaches to the current buffer
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -32,9 +32,24 @@ return {
 				vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
 				vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 				vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-				vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-				vim.keymap.set({ "n", "x" }, "<leader>ff", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-				vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+				vim.keymap.set(
+					"n",
+					"<leader>rn",
+					"<cmd>lua vim.lsp.buf.rename()<cr>",
+					vim.tbl_extend("force", opts, { desc = "Rename symbol" })
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>ca",
+					"<cmd>lua vim.lsp.buf.code_action()<cr>",
+					vim.tbl_extend("force", opts, { desc = "Code action" })
+				)
+				vim.keymap.set(
+					{ "n", "x" },
+					"<leader>ff",
+					"<cmd>lua vim.lsp.buf.format({async = true})<cr>",
+					vim.tbl_extend("force", opts, { desc = "Format buffer" })
+				)
 			end,
 		})
 
