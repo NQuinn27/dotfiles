@@ -1,9 +1,9 @@
 theme=tokyonight_night
 
 cursor-text = #000000
-font-family="BitstromWera Nerd Font Mono"
-font-size=14.0
-adjust-cell-height=2
+font-family="JetbrainsMono Nerd Font"
+font-size=24.0
+adjust-cell-height=1
 
 window-width=800
 window-height=600
