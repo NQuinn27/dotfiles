@@ -26,50 +26,14 @@ return {
 				end,
 				desc = "Continue",
 			},
-			{
-				"<leader>db",
-				function()
-					require("xcodebuild.integrations.dap").build_and_debug()
-				end,
-				desc = "Xcode: Build and Debug",
-				noremap = true,
-			},
-			{
-				"<leader>dr",
-				function()
-					require("xcodebuild.integrations.dap").debug_without_build()
-				end,
-				desc = "Xcode: Debug Without Building",
-			},
-			{
-				"<leader>dT",
-				function()
-					require("xcodebuild.integrations.dap").debug_tests()
-				end,
-				desc = "Xcode: Debug Tests",
-			},
-			{
-				"<leader>b",
-				function()
-					require("xcodebuild.integrations.dap").toggle_breakpoint()
-				end,
-				desc = "Xcode: Toggle Breakpoint",
-			},
-			{
-				"<leader>B",
-				function()
-					require("xcodebuild.integrations.dap").toggle_message_breakpoint()
-				end,
-				desc = "Xcode: Toggle Message Breakpoint",
-			},
-			{
-				"<leader>dX",
-				function()
-					require("xcodebuild.integrations.dap").terminate_session()
-				end,
-				desc = "Xcode: Terminate Debugger",
-			},
 		},
+		config = function()
+			vim.cmd("hi DapBreakpointColor guifg=#fa4848")
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "⯈", texthl = "DapBreakpointColor", linehl = "", numhl = "" }
+			)
+		end,
 		opts = function()
 			local dap, dapui = require("dap"), require("dapui")
 			require("dapui").setup()
@@ -93,13 +57,12 @@ return {
 			require("dap-go").setup()
 
 			-- Codelldb
-			local codelldbPath = os.getenv("HOME") .. "/tools/codelldb-darwin-arm64/extension/adapter/codelldb"
-			local library_path = os.getenv("HOME") .. "/tools/codelldb-darwin-arm64/extension/lldb/lib/liblldb.dylib"
-
-			require("xcodebuild.integrations.dap").setup(codelldbPath)
-			require("rustaceanvim.config").get_codelldb_adapter(codelldbPath, library_path)
-
-			require("dap-lldb").setup()
+			-- local mason_registry = require("mason-registry")
+			-- local codelldb = mason_registry.get_package("codelldb") -- note that this will error if you provide a non-existent package name
+			-- local codelldbpath = codelldb:get_install_path()
+			-- --
+			-- require("xcodebuild.integrations.dap").setup(codelldbpath)
+			-- require("rustaceanvim.config").get_codelldb_adapter(codelldbPath, library_path)
 		end,
 	},
 	-- which key integration
