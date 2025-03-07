@@ -1,8 +1,8 @@
 theme=tokyonight_night
 
 cursor-text = #000000
-font-family="JetbrainsMono Nerd Font"
-font-size=24.0
+font-family="Jetbrains Mono Nerd Font"
+font-size=14
 adjust-cell-height=1
 
 window-width=800
