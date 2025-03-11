@@ -8,7 +8,7 @@ vim.g.maplocalleader = " "
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()
 
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- vim.keymap.set("n", "-", vim.cmd.Explore)
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
