@@ -1,4 +1,4 @@
-theme=tokyonight_night
+theme=catppuccin-mocha
 
 cursor-text = #000000
 font-family="Jetbrains Mono Nerd Font"
