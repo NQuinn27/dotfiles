@@ -6,6 +6,9 @@ return {
 			lsp = {
 				win = { position = "right" },
 			},
+			symbols = {
+				win = { position = "right", size = 0.15 },
+			},
 		},
 	},
 	keys = {
