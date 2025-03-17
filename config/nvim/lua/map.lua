@@ -36,7 +36,7 @@ vim.keymap.set("n", "t<C-s>", vim.cmd.Testlast, { noremap = true, silent = true 
 vim.keymap.set("n", "t<C-g>", vim.cmd.TestVisit, { noremap = true, silent = true })
 
 -- Switch panes sides
-vim.keymap.set("n", "<leader>j", "<C-w>R")
-vim.keymap.set("n", "<leader>k", "<C-w>L")
+-- vim.keymap.set("n", "<leader>j", "<C-w>R")
+-- vim.keymap.set("n", "<leader>k", "<C-w>L")
 
 vim.keymap.set("n", "<leader>mdp", vim.cmd.MarkdownPreview, { noremap = true, silent = true })
