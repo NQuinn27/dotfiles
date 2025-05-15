@@ -18,6 +18,8 @@ vim.wo.number = true
 
 vim.opt.guicursor = ""
 vim.opt.nu = true
+-- Make line numbers default
+vim.wo.number = true
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -35,8 +37,6 @@ vim.opt.colorcolumn = "88"
 vim.o.hlsearch = true
 vim.keymap.set("n", "<esc>", ":noh<CR>")
 
--- Make line numbers default
-vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
@@ -66,15 +66,15 @@ vim.o.completeopt = "menuone,noselect"
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = "*",
 })
 
 vim.filetype.add({
-	extension = {
-		mdx = "mdx",
-	},
+    extension = {
+        mdx = "mdx",
+    },
 })
