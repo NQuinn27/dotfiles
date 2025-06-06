@@ -1,4 +1,4 @@
-theme=catppuccin-frappe
+theme=catppuccin-macchiato
 
 cursor-text = #000000
 font-family="SF Mono Nerd Font"
@@ -7,4 +7,3 @@ adjust-cell-height=2
 
 window-width=800
 window-height=600
-keybind = shift+enter=text:\n

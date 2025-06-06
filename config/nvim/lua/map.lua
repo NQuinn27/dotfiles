@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "Q", "<nop")
 
 -- Find and replace for current word under cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "t<C-n>", vim.cmd.TestNearest, { noremap = true, silent = true })
 vim.keymap.set("n", "t<C-f>", vim.cmd.TestFile, { noremap = true, silent = true })
