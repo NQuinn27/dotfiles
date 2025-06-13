@@ -1,13 +1,15 @@
 return {
+	{ "echasnovski/mini.nvim", version = false },
 	{
-		"numToStr/Comment.nvim",
+		"echasnovski/mini.comment",
+		version = false,
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
 		config = function()
-			require("Comment").setup()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false, -- Disable autocmd to avoid conflicts with MiniComment
+			})
 		end,
-	},
-	{
-		"folke/ts-comments.nvim",
-		event = "VeryLazy",
-		opts = {},
 	},
 }

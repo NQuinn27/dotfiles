@@ -1,5 +1,4 @@
-theme=catppuccin-frappe
-
+theme=catppuccin-mocha
 cursor-text = #000000
 font-family="SF Mono Nerd Font"
 font-size=14

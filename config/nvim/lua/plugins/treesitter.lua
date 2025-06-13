@@ -21,7 +21,7 @@ return {
 				"markdown",
 				"markdown_inline",
 				"javascript",
-                "yaml",
+				"yaml",
 			},
 			auto_install = true,
 			sync_install = false,
