@@ -18,7 +18,9 @@ return {
 			claude = {
 				model = "claude-sonnet-4-20250514",
 				api_key = os.getenv("ANTHROPIC_API_KEY"),
-				max_tokens = 8192, -- Set this to the max tokens you want to use
+				extra_request_body = {
+					max_tokens = 8192, -- Set this to the max tokens you want to use
+				},
 			},
 		},
 		selector = {

@@ -2,7 +2,6 @@ return {
   "snacks.nvim",
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
@@ -21,13 +20,12 @@ return {
         -- wo = { wrap = true } -- Wrap notifications
       },
     },
-  },
-  dashboard = {
-    preset = {
-      pick = function(cmd, opts)
-        return LazyVim.pick(cmd, opts)()
-      end,
-      header = [[
+    dashboard = {
+      preset = {
+        pick = function(cmd, opts)
+          return LazyVim.pick(cmd, opts)()
+        end,
+        header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
 ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
@@ -47,6 +45,7 @@ return {
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
+      },
     },
   },
 }
