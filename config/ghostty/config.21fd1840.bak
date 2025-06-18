@@ -1,9 +1,0 @@
-theme=catppuccin-macchiato
-
-cursor-text = #000000
-font-family="SF Mono Nerd Font"
-font-size=14
-adjust-cell-height=2
-
-window-width=800
-window-height=600
