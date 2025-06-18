@@ -1,6 +1,7 @@
-theme=catppuccin-mocha
-cursor-text = #000000
-font-family="SF Mono Nerd Font"
+theme = catppuccin-mocha
+background = #14161B
+cursor-text = 000000
+font-family="BitstromWera Nerd Font"
 font-size=14
 adjust-cell-height=2
 
