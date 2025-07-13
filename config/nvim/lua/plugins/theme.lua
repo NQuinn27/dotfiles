@@ -2,9 +2,9 @@ function ColorMyPencils(color)
 	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = 7, bg = "#313244" })
+	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	-- vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = 7, bg = "#313244" })
 end
 
 return {
@@ -14,14 +14,14 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				flavour = "mocha", -- latte, frappe, macchiato, mocha
-				transparent_background = true, -- Enable transparent background
+				flavour = "frappe", -- latte, macchiato, macchiato, mocha
+				-- transparent_background = true, -- Enable transparent background
 				background = {
-					dark = "macchiato",
+					dark = "frappe",
 					light = "latte",
 				},
 			})
-			ColorMyPencils("catppuccin-mocha")
+			ColorMyPencils("catppuccin-frappe")
 		end,
 	},
 	{
