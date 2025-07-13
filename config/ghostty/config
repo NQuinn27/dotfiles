@@ -1,8 +1,7 @@
-theme = catppuccin-mocha
-background = #14161B
+theme = catppuccin-frappe
 cursor-text = 000000
 font-family="BitstromWera Nerd Font"
-font-size=14
+font-size=16
 adjust-cell-height=2
 
 window-width=800
