@@ -1,7 +1,7 @@
 theme = catppuccin-frappe
 cursor-text = 000000
 font-family="BitstromWera Nerd Font"
-font-size=16
+font-size=14
 adjust-cell-height=2
 
 window-width=800
