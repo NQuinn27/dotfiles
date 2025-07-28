@@ -49,12 +49,8 @@ alias cr="cargo run"
 alias ct="cargo test"
 alias cb="cargo build"
 
-. ~/.asdf/plugins/java/set-java-home.zsh
-. ~/.asdf/plugins/golang/set-env.zsh
-
 eval $(/opt/homebrew/bin/brew shellenv)
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 # Created by `pipx` on 2024-10-08 10:16:16
 export PATH="$PATH:$HOME/.local/scripts"
 # .env integration
@@ -63,3 +59,7 @@ set -o allexport; source ~/.env; set +o allexport
 bindkey -s ^f "tmux-sessionizer\n"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
