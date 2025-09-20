@@ -1,4 +1,4 @@
-theme = tokyonight_night
+theme = dark:catppuccin-frappe,light:catppuccin-latte
 cursor-text = 000000
 font-family="Google Sans Code"
 font-size=14
@@ -7,3 +7,4 @@ adjust-cell-height=2
 window-width=800
 window-height=600
 keybind = shift+enter=text:\n
+macos-option-as-alt=true
