@@ -66,10 +66,21 @@ return {
   --     require("onedark").load()
   --   end,
   -- },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight-night",
-    },
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "catppuccin-frappe",
+  --   },
+  -- },
+
+  { "f-person/auto-dark-mode.nvim" },
+  opts = {
+    update_interval = 1000, -- Check every 1 second
+    set_dark_mode = function()
+      vim.cmd([[colorscheme catppuccin-frappe]]) -- Replace with your dark theme
+    end,
+    set_light_mode = function()
+      vim.cmd([[colorscheme catppuccin-latte]]) -- Replace with your light theme
+    end,
   },
 }
