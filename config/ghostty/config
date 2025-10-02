@@ -1,4 +1,4 @@
-theme = dark:catppuccin-frappe,light:catppuccin-latte
+theme = catppuccin-frappe
 cursor-text = 000000
 font-family="Google Sans Code"
 font-size=14
