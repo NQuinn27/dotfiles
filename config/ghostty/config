@@ -1,8 +1,8 @@
-theme = catppuccin-frappe
-cursor-text = 000000
 font-family="Google Sans Code"
 font-size=14
 adjust-cell-height=2
+
+background = #0a0a0a
 
 window-width=800
 window-height=600
