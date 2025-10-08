@@ -18,7 +18,7 @@ return {
 				python = { "ruff" },
 				go = { "gofumpt", "goimports", "goimports-reviser" },
 				json = { "jq" },
-				-- gherkin = { "gherkin-lint" }
+				gherkin = { "gherkin-lint" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
