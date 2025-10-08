@@ -14,8 +14,8 @@ return {
         },
         settings = {
           cucumber = {
-            features = { "features/**/*.feature" },
-            glue = { "src/**/*.ts" },
+            features = { "features/**/*.feature", "ui/features/**/*.feature", "api/features/**/*.feature" },
+            glue = { "src/**/*.ts", "ui/src/**/*.ts", "api/src/**/*.py" },
           },
         },
       },
