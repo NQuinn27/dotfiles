@@ -1,4 +1,4 @@
-theme = dark:catppuccin-macchiato,light:solarized-light
+theme = dark:rose-pine,light:rose-pine-dawn
 cursor-text = 000000
 font-family="FiraCode Nerd Font"
 font-size=14
