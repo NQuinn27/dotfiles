@@ -14,6 +14,7 @@ return {
 
         require("lualine").setup({
             options = {
+                theme = get_lualine_theme(),
                 icons_enabled = true,
                 component_separators = "|",
                 section_separators = "",
