@@ -1,4 +1,4 @@
-theme = dark:catppuccin-macchiato,light:solarized-light
+theme = dark:vscode-dark,light:vscode-light
 cursor-text = 000000
 font-family="JetbrainsMono Nerd Font"
 font-size=14
