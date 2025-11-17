@@ -1,17 +1,13 @@
 return {
   {
-    "maxmx03/solarized.nvim",
-    lazy = true,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = true,
+    "Mofiqul/vscode.nvim",
+    lazy = false,
     priority = 1000,
     opts = {
-      flavour = "macchiato",
+      transparent = false,
+      italic_comments = true,
+      underline_links = true,
+      disable_nvimtree_bg = true,
     },
   },
   {
@@ -29,11 +25,12 @@ return {
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
-        vim.cmd("colorscheme catppuccin")
+        vim.o.background = "dark"
+        require("vscode").load("dark")
       end,
       set_light_mode = function()
         vim.o.background = "light"
-        vim.cmd("colorscheme solarized")
+        require("vscode").load("light")
       end,
     },
   },
