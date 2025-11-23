@@ -1,4 +1,4 @@
-theme = dark:vscode-dark,light:vscode-light
+theme = dark:Rose Pine,light:vscode-light
 cursor-text = 000000
 font-family="Monaspace Argon NF;FiraCode Nerd Font;Menlo"
 font-family-italic="Monaspace Radon NF"

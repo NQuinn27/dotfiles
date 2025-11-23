@@ -1,9 +1,20 @@
 return {
     "nvim-lualine/lualine.nvim",
     config = function()
+        local function get_lualine_theme()
+            local colorscheme = vim.g.colors_name
+            if colorscheme and colorscheme:match("catppuccin") then
+                return "catppuccin"
+            elseif colorscheme and colorscheme:match("solarized") then
+                return "solarized"
+            else
+                return "auto"
+            end
+        end
+
         require("lualine").setup({
             options = {
-                theme = "auto",
+                theme = get_lualine_theme(),
                 icons_enabled = true,
                 component_separators = "|",
                 section_separators = "",
