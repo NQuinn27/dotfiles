@@ -53,6 +53,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 # Created by `pipx` on 2024-10-08 10:16:16
 export PATH="$PATH:$HOME/.local/scripts"
+export PATH="$PATH:$GOPATH"
 # .env integration
 set -o allexport; source ~/.env; set +o allexport
 
