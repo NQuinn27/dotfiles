@@ -35,7 +35,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "vscode",
     },
   },
   {
@@ -51,7 +51,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        vim.cmd.colorscheme("rose-pine")
+        vim.cmd.colorscheme("vscode")
       end,
       set_light_mode = function()
         vim.o.background = "light"
