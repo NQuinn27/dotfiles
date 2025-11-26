@@ -19,31 +19,6 @@ return {
     },
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    opts = {
-      -- color_overrides = {
-      --   mocha = {
-      --     base = "#000000",
-      --     mantle = "#000000",
-      --     crust = "#000000",
-      --   },
-      -- },
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "vscode",
-    },
-  },
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    proiority = 1000,
-  },
-  {
     "f-person/auto-dark-mode.nvim",
     lazy = false,
     priority = 1000,
@@ -51,7 +26,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        vim.cmd.colorscheme("vscode")
+        require("vscode").load("dark")
       end,
       set_light_mode = function()
         vim.o.background = "light"
