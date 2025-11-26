@@ -1,0 +1,10 @@
+#!/bin/bash
+# Detects macOS appearance and sets tmux status bar background accordingly
+
+APPEARANCE=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+
+if [ "$APPEARANCE" = "Dark" ]; then
+    tmux set -g status-style "bg=#181818"
+else
+    tmux set -g status-style "bg=#E8E8E8"
+fi
