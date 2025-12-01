@@ -1,5 +1,30 @@
 return {
 	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				-- Formatters
+				"stylua",
+				"rubocop",
+				"prettier",
+				"ast-grep",
+				"ruff",
+				"gofumpt",
+				"goimports",
+				"jq",
+				-- Linters
+				"luacheck",
+				"eslint_d",
+				"swiftlint",
+				"golangci-lint",
+				"jsonlint",
+			},
+			auto_update = false,
+			run_on_start = true,
+		},
+	},
+	{
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
