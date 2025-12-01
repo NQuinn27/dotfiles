@@ -2,6 +2,7 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"saghen/blink.cmp",
+		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
 		-- Setup Mason for installing language servers
@@ -10,6 +11,19 @@ return {
 				"github:mason-org/mason-registry",
 				"github:Crashdummyy/mason-registry",
 			},
+		})
+
+		-- Setup mason-lspconfig to automatically install LSP servers
+		require("mason-lspconfig").setup({
+			ensure_installed = {
+				"ts_ls",
+				"pyright",
+				"lua_ls",
+				"yamlls",
+				"cucumber_language_server",
+				"gopls",
+			},
+			automatic_installation = true,
 		})
 
 		-- Global mappings.

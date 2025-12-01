@@ -11,7 +11,10 @@ return {
 	},
 	{
 		"mrcjkb/rustaceanvim",
-		version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
+		version = "^5",
 		ft = { "rust" },
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
 	},
 }
