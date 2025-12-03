@@ -3,6 +3,7 @@ return {
   opts = {
     explorer = { enabled = false },
     scroll = { enabled = false },
+    inlay_hints = { enabled = false },
     dashboard = {
       preset = {
         pick = function(cmd, opts)
