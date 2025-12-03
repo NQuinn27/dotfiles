@@ -11,6 +11,27 @@ return {
     },
   },
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      dim_inactive = {
+        enabled = true,
+        shade = "dark",
+        percentage = 0.15,
+      },
+      styles = {
+        keywords = { "italic" },
+      },
+      lsp_styles = {
+        inlay_hints = {
+          background = false,
+        },
+      },
+    },
+  },
+  { "rose-pine/neovim", name = "rose-pine" },
+  {
     "f-person/auto-dark-mode.nvim",
     lazy = false,
     priority = 1000,
@@ -18,15 +39,15 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        require("vscode").load("dark")
-        -- Comments more prominent
-        vim.api.nvim_set_hl(0, "Normal", { bg = "#1D1D1D" })
-        vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#D7BA7D", bg = "none", nocombine = true })
-        vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181818" })
+        vim.cmd("colorscheme catppuccin")
+        -- require("vscode").load("dark")
+        -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1D1D1D" })
+        -- vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#D7BA7D", bg = "none", nocombine = true })
+        -- vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181818" })
       end,
       set_light_mode = function()
         vim.o.background = "light"
