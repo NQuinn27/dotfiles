@@ -1,6 +1,6 @@
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+theme = dark:vscode-dark,light:vscode-light
 cursor-text = 000000
-background = #181825
+background = #181818
 font-family="Monaspace Argon NF;FiraCode Nerd Font;Menlo"
 font-size=14
 adjust-cell-height=2
