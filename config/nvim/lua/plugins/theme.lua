@@ -53,16 +53,16 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        -- vim.cmd("colorscheme catppuccin")
+        vim.cmd("colorscheme catppuccin-frappe")
         -- vim.cmd("colorscheme gruvbox-material")
-        require("vscode").load("dark")
-        vim.api.nvim_set_hl(0, "Normal", { bg = "#1D1D1D" })
-        vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#D7BA7D", bg = "none", nocombine = true })
-        vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#181818" })
-        vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181818" })
+        -- require("vscode").load("dark")
+        -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1D1D1D" })
+        -- vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#D7BA7D", bg = "none", nocombine = true })
+        -- vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#181818" })
+        -- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181818" })
       end,
       set_light_mode = function()
         vim.o.background = "light"
