@@ -110,7 +110,7 @@ alias vi="nvim"
 
 # File operations
 alias ls="eza"
-alias cat="bat --theme=\"Catppuccin Macchiato\""
+alias cat="bat"
 
 # Safety nets
 alias rm='rm -i'
@@ -140,6 +140,9 @@ alias piru="pod install --repo-update"
 alias cr="cargo run"
 alias ct="cargo test"
 alias cb="cargo build"
+
+# Grep
+alias grep="rg -uuu"
 
 # ============================================================================
 # KEY BINDINGS

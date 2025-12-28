@@ -37,7 +37,6 @@ vim.opt.colorcolumn = "88"
 vim.o.hlsearch = true
 vim.keymap.set("n", "<esc>", ":noh<CR>")
 
-
 -- Enable mouse mode
 vim.o.mouse = "a"
 
@@ -58,6 +57,8 @@ vim.wo.signcolumn = "yes"
 -- Set colorscheme
 vim.o.termguicolors = true
 
+vim.o.winborder = "rounded"
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
@@ -66,15 +67,15 @@ vim.o.completeopt = "menuone,noselect"
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = "*",
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
 })
 
 vim.filetype.add({
-    extension = {
-        mdx = "mdx",
-    },
+	extension = {
+		mdx = "mdx",
+	},
 })

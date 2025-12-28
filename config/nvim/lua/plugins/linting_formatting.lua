@@ -16,7 +16,7 @@ return {
 				-- Linters
 				"luacheck",
 				"eslint_d",
-				"swiftlint",
+				-- "swiftlint",
 				"golangci-lint",
 				"jsonlint",
 			},
