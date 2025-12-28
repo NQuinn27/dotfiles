@@ -1,10 +1,10 @@
 -- Xcodebuild keymaps for Swift files
 vim.keymap.set("n", "<leader>X", "<cmd>XcodebuildPicker<cr>", { desc = "Show Xcodebuild Actions", buffer = true })
 vim.keymap.set(
-	"n",
-	"<leader>xf",
-	"<cmd>XcodebuildProjectManager<cr>",
-	{ desc = "Show Project Manager Actions", buffer = true }
+  "n",
+  "<leader>xf",
+  "<cmd>XcodebuildProjectManager<cr>",
+  { desc = "Show Project Manager Actions", buffer = true }
 )
 
 vim.keymap.set("n", "<leader>xb", "<cmd>XcodebuildBuild<cr>", { desc = "Build Project", buffer = true })
@@ -19,25 +19,25 @@ vim.keymap.set("n", "<leader>x.", "<cmd>XcodebuildTestRepeat<cr>", { desc = "Rep
 vim.keymap.set("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle Xcodebuild Logs", buffer = true })
 
 vim.keymap.set("n", "<leader>db", function()
-	require("xcodebuild.integrations.dap").build_and_debug()
+  require("xcodebuild.integrations.dap").build_and_debug()
 end, { desc = "Xcode: Build and Debug", buffer = true, noremap = true })
 
 vim.keymap.set("n", "<leader>dr", function()
-	require("xcodebuild.integrations.dap").debug_without_build()
+  require("xcodebuild.integrations.dap").debug_without_build()
 end, { desc = "Xcode: Debug Without Building", buffer = true })
 
 vim.keymap.set("n", "<leader>dT", function()
-	require("xcodebuild.integrations.dap").debug_tests()
+  require("xcodebuild.integrations.dap").debug_tests()
 end, { desc = "Xcode: Debug Tests", buffer = true })
 
 vim.keymap.set("n", "<leader>b", function()
-	require("xcodebuild.integrations.dap").toggle_breakpoint()
+  require("xcodebuild.integrations.dap").toggle_breakpoint()
 end, { desc = "Xcode: Toggle Breakpoint", buffer = true })
 
 vim.keymap.set("n", "<leader>B", function()
-	require("xcodebuild.integrations.dap").toggle_message_breakpoint()
+  require("xcodebuild.integrations.dap").toggle_message_breakpoint()
 end, { desc = "Xcode: Toggle Message Breakpoint", buffer = true })
 
 vim.keymap.set("n", "<leader>dX", function()
-	require("xcodebuild.integrations.dap").terminate_session()
+  require("xcodebuild.integrations.dap").terminate_session()
 end, { desc = "Xcode: Terminate Debugger", buffer = true })
