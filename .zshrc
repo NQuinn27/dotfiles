@@ -89,6 +89,7 @@ export PATH="$PATH:$HOME/.local/scripts"
 export PATH="$PATH:${GOPATH:-$HOME/go}/bin"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export GOPROXY=https://proxy.golang.org,direct
 
 # ============================================================================
 # CUSTOM FUNCTIONS

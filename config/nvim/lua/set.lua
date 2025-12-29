@@ -32,7 +32,7 @@ vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "88"
+vim.opt.colorcolumn = "100"
 -- Set highlight on search
 vim.o.hlsearch = true
 vim.keymap.set("n", "<esc>", ":noh<CR>")
