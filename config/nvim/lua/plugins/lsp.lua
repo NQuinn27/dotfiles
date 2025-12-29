@@ -22,6 +22,7 @@ return {
 				"yamlls",
 				"cucumber_language_server",
 				"gopls",
+				"bashls",
 			},
 			automatic_installation = true,
 		})
@@ -192,6 +193,11 @@ return {
 			},
 		})
 
+		vim.lsp.config.bashls = {
+			cmd = { "bash-language-server", "start" },
+			filetypes = { "bash", "sh" },
+		}
+
 		-- Enable all configured servers
 		vim.lsp.enable({
 			"ts_ls",
@@ -201,6 +207,7 @@ return {
 			"cucumber_language_server",
 			"sourcekit",
 			"gopls",
+			"bashls",
 		})
 	end,
 }
