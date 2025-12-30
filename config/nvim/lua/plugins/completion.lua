@@ -8,12 +8,11 @@ return {
 			version = "*",
 		},
 	},
-
 	version = "*",
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
-		keymap = { preset = "enter" },
+		keymap = { preset = "default" },
 		appearance = {
 			use_nvim_cmp_as_default = true,
 			nerd_font_variant = "mono",
@@ -24,6 +23,13 @@ return {
 				"path",
 				"snippets",
 				"buffer",
+			},
+		},
+		friendly_snippets = {
+			enabled = true,
+			extended_filetypes = {
+				typescript = { "tsdoc" },
+				rust = { "rustdoc" },
 			},
 		},
 	},

@@ -1,7 +1,10 @@
 return {
 	{
 		"nvzone/showkeys",
-		cmd = "ShowKeysToggle",
+		cmd = "ShowkeysToggle",
+		keys = {
+			{ "<leader>uk", ":ShowkeysToggle<CR>", desc = "Toggle ShowKeys" },
+		},
 		opts = {
 			maxkeys = 3,
 			show_count = true,
