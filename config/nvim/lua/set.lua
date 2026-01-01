@@ -29,6 +29,16 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+-- Don't auto-insert comment leaders when using `o`/`O`.
+vim.opt.formatoptions:remove("o")
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("FormatOptions", { clear = true }),
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
+	end,
+})
+
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"

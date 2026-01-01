@@ -1,6 +1,7 @@
-theme = dark:Vague,light:vscode-light
+theme = dark:Rose Pine,light:catppuccin-latte
+background=#181818
 cursor-text = 000000
-font-family="Monaspace Argon NF;FiraCode Nerd Font;Menlo"
+font-family="JetBrainsMono Nerd Font Mono, Menlo, monospace"
 font-size=14
 adjust-cell-height=2
 # background-opacity=0.95
