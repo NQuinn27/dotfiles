@@ -5,28 +5,6 @@ return {
 		version = false,
 	},
 	{
-		"echasnovski/mini.files",
-		config = function()
-			local MiniFiles = require("mini.files")
-			MiniFiles.setup({
-				mappings = {
-					go_in = "<space>",
-					go_in_plus = "L",
-					go_out = "-",
-					go_out_plus = "H",
-				},
-				options = {
-					use_as_default_explorer = false,
-				},
-			})
-			vim.keymap.set("n", "<leader>ee", MiniFiles.open, { desc = "Open Mini Files" })
-			vim.keymap.set("n", "<leader>ef", function()
-				MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-				MiniFiles.reveal_cwd()
-			end, { desc = "Open Mini Files in Current Directory" })
-		end,
-	},
-	{
 		"echasnovski/mini.surround",
 		event = "VeryLazy",
 		opts = {
