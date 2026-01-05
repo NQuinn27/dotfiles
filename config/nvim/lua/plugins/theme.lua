@@ -87,13 +87,7 @@ return {
 			end,
 			set_light_mode = function()
 				vim.o.background = "light"
-				require("vscode").load("light")
-				vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#F8F8F8" })
-				vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#90D5FF", bg = "#F8F8F8", nocombine = true })
-				vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#F8F8F8" })
-				vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#F8F8F8" })
-				vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#F8F8F8" })
-				vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#F8F8F8" })
+				vim.cmd("colorscheme gruvbox")
 			end,
 		},
 	},

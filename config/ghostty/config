@@ -1,5 +1,4 @@
-theme = dark:Rose Pine,light:catppuccin-latte
-background=#181818
+theme = dark:Gruvbox Dark Hard,light:Gruvbox Light Hard
 cursor-text = 000000
 font-family="JetBrainsMono Nerd Font Mono, Menlo, monospace"
 font-size=14
