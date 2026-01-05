@@ -24,12 +24,16 @@ return {
 				"snippets",
 				"buffer",
 			},
-		},
-		friendly_snippets = {
-			enabled = true,
-			extended_filetypes = {
-				typescript = { "tsdoc" },
-				rust = { "rustdoc" },
+			providers = {
+				snippets = {
+					opts = {
+						friendly_snippets = true,
+						extended_filetypes = {
+							typescript = { "tsdoc" },
+							rust = { "rustdoc" },
+						},
+					},
+				},
 			},
 		},
 	},
