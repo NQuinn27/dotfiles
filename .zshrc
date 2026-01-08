@@ -142,6 +142,10 @@ alias cr="cargo run"
 alias ct="cargo test"
 alias cb="cargo build"
 
+# tailscale
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
 # Grep
 alias grep="rg -uuu"
 
