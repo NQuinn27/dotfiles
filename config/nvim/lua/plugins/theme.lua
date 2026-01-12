@@ -61,9 +61,10 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox-material",
+      colorscheme = "catppuccin-mocha",
     },
   },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "f-person/auto-dark-mode.nvim",
     lazy = false,
@@ -73,7 +74,7 @@ return {
       set_dark_mode = function()
         vim.o.background = "dark"
         -- vim.cmd("colorscheme catppuccin-frappe")
-        vim.cmd("colorscheme gruvbox-material")
+        vim.cmd("colorscheme catppuccin-mocha")
         -- require("vscode").load("dark")
         -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1E2021" })
         -- vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#181818" })
