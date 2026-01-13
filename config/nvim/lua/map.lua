@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "Q", "<nop")
 
 -- Find and replace for current word under cursor
--- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "t<C-n>", vim.cmd.TestNearest, { noremap = true, silent = true })
 vim.keymap.set("n", "t<C-f>", vim.cmd.TestFile, { noremap = true, silent = true })
@@ -36,11 +36,11 @@ vim.keymap.set("n", "t<C-s>", vim.cmd.Testlast, { noremap = true, silent = true 
 vim.keymap.set("n", "t<C-g>", vim.cmd.TestVisit, { noremap = true, silent = true })
 
 -- Switch panes sides
--- vim.keymap.set("n", "<leader>j", "<C-w>R")
--- vim.keymap.set("n", "<leader>k", "<C-w>L")
+vim.keymap.set("n", "<leader>j", "<C-w>R")
+vim.keymap.set("n", "<leader>k", "<C-w>L")
 
 vim.keymap.set("n", "<leader>mdp", vim.cmd.MarkdownPreview, { noremap = true, silent = true })
+
 -- Remap <C-d> to <C-d>zz
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
