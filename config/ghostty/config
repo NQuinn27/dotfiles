@@ -1,4 +1,4 @@
-theme = dark:Gruvbox Dark Hard,light:Gruvbox Light Hard
+theme = dark:Catppuccin Mocha,light:Catppuccin Frappe
 cursor-text = 000000
 font-family="JetBrainsMono Nerd Font Mono, Menlo, monospace"
 font-size=14
