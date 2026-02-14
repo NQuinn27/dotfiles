@@ -10,4 +10,3 @@ window-width=800
 window-height=600
 keybind = shift+enter=text:\n
 macos-option-as-alt=true
-
