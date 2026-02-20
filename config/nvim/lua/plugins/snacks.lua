@@ -27,7 +27,7 @@ return {
 			},
 		},
 		keys = {
-			-- Top Pickers & Explorer
+			-- Top pickers
 			{
 				"<leader><space>",
 				function()
@@ -56,28 +56,7 @@ return {
 				end,
 				desc = "Command History",
 			},
-			{
-				"<leader>n",
-				function()
-					require("snacks").picker.notifications()
-				end,
-				desc = "Notification History",
-			},
-			{
-				"<C-e>",
-				function()
-					require("snacks").explorer()
-				end,
-				desc = "File Explorer",
-			},
 			-- find
-			{
-				"<leader>fb",
-				function()
-					require("snacks").picker.buffers()
-				end,
-				desc = "Buffers",
-			},
 			{
 				"<leader>fc",
 				function()
@@ -165,13 +144,6 @@ return {
 			},
 			-- Grep
 			{
-				"<leader>sb",
-				function()
-					require("snacks").picker.lines()
-				end,
-				desc = "Buffer Lines",
-			},
-			{
 				"<leader>sB",
 				function()
 					require("snacks").picker.grep_buffers()
@@ -223,13 +195,6 @@ return {
 				desc = "Buffer Lines",
 			},
 			{
-				"<leader>sc",
-				function()
-					require("snacks").picker.command_history()
-				end,
-				desc = "Command History",
-			},
-			{
 				"<leader>sC",
 				function()
 					require("snacks").picker.commands()
@@ -258,27 +223,6 @@ return {
 				desc = "Help Pages",
 			},
 			{
-				"<leader>sH",
-				function()
-					require("snacks").picker.highlights()
-				end,
-				desc = "Highlights",
-			},
-			{
-				"<leader>si",
-				function()
-					require("snacks").picker.icons()
-				end,
-				desc = "Icons",
-			},
-			{
-				"<leader>sj",
-				function()
-					require("snacks").picker.jumps()
-				end,
-				desc = "Jumps",
-			},
-			{
 				"<leader>sk",
 				function()
 					require("snacks").picker.keymaps()
@@ -298,13 +242,6 @@ return {
 					require("snacks").picker.marks()
 				end,
 				desc = "Marks",
-			},
-			{
-				"<leader>sM",
-				function()
-					require("snacks").picker.man()
-				end,
-				desc = "Man Pages",
 			},
 			{
 				"<leader>sp",

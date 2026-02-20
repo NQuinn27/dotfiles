@@ -32,7 +32,7 @@ return {
 		vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-		vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics Set loclist" })
+		vim.keymap.set("n", "<leader>xq", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
 
 		-- Keymap for normal mode, enter opens float
 		-- after the language server attaches to the current buffer
@@ -65,7 +65,7 @@ return {
 				)
 				vim.keymap.set(
 					{ "n", "x" },
-					"<leader>ff",
+					"<leader>cf",
 					"<cmd>lua vim.lsp.buf.format({async = true})<cr>",
 					vim.tbl_extend("force", opts, { desc = "Format buffer" })
 				)
@@ -77,7 +77,7 @@ return {
 		})
 
 		-- Create a custom LspInfo command
-		vim.api.nvim_create_user_command("LspInfo", function()
+		vim.api.nvim_create_user_command("LspInfoLocal", function()
 			local clients = vim.lsp.get_clients({ bufnr = 0 })
 			if #clients == 0 then
 				print("No LSP clients attached to current buffer")

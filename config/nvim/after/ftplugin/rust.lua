@@ -10,6 +10,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>cw", function()
 	vim.cmd.RustLsp("codeAction")
 end, { desc = "Code Action", buffer = bufnr })
-vim.keymap.set("n", "<leader>dr", function()
+vim.keymap.set("n", "<leader>rd", function()
 	vim.cmd.RustLsp("debuggables")
 end, { desc = "Rust Debuggables", buffer = bufnr })
