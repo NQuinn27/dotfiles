@@ -1,0 +1,26 @@
+WRN 2026-02-20T11:01:34.535 ?.34524    server_start:197: Failed to start server: operation not permitted: /var/folders/1w/68qlvgk92jj09wfwbn0510kh0000gn/T/nvim.niall/AT38WE/nvim.34524.0
+WRN 2026-02-20T11:01:34.536 ?.34522    server_start:197: Failed to start server: operation not permitted: /var/folders/1w/68qlvgk92jj09wfwbn0510kh0000gn/T/nvim.niall/eY5mpQ/nvim.34522.0
+INF 2026-02-20T11:01:34.536 ?.34524    set_init_2:606: startup runtimepath/packpath value: /Users/niall/.config/nvim,/etc/xdg/nvim,/Users/niall/.local/share/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site,/usr/local/share/nvim/runtime,/usr/local/lib/nvim,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site/after,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/Users/niall/.local/share/nvim/site/after,/etc/xdg/nvim/after,/Users/niall/.config/nvim/after
+INF 2026-02-20T11:01:34.536 ?.34522    set_init_2:606: startup runtimepath/packpath value: /Users/niall/.config/nvim,/etc/xdg/nvim,/Users/niall/.local/share/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site,/usr/local/share/nvim/runtime,/usr/local/lib/nvim,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site/after,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/Users/niall/.local/share/nvim/site/after,/etc/xdg/nvim/after,/Users/niall/.config/nvim/after
+WRN 2026-02-20T11:01:34.536 ?.34523    server_start:197: Failed to start server: operation not permitted: /var/folders/1w/68qlvgk92jj09wfwbn0510kh0000gn/T/nvim.niall/wNdMlL/nvim.34523.0
+INF 2026-02-20T11:01:34.536 ?.34523    set_init_2:606: startup runtimepath/packpath value: /Users/niall/.config/nvim,/etc/xdg/nvim,/Users/niall/.local/share/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site,/usr/local/share/nvim/runtime,/usr/local/lib/nvim,/Applications/Ghostty.app/Contents/Resources/ghostty/../nvim/site/after,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/Users/niall/.local/share/nvim/site/after,/etc/xdg/nvim/after,/Users/niall/.config/nvim/after
+INF 2026-02-20T11:01:34.625 ?.34522    emsg_multiline:833: E886: System error while opening temporary ShaDa file /Users/niall/.local/state/nvim/shada/main.shada.tmp.a for writing: operation not permitted
+INF 2026-02-20T11:01:34.626 ?.34522    os_exit:693: Nvim exit: 0
+INF 2026-02-20T11:01:34.626 ?.34523    emsg_multiline:833: E886: System error while opening temporary ShaDa file /Users/niall/.local/state/nvim/shada/main.shada.tmp.a for writing: operation not permitted
+INF 2026-02-20T11:01:34.627 ?.34523    os_exit:693: Nvim exit: 0
+INF 2026-02-20T11:01:34.926 ?.34524    emsg_multiline:833: E5009: Invalid $VIMRUNTIME: /usr/local/share/nvim/runtime
+INF 2026-02-20T11:01:34.926 ?.34524    emsg_multiline:833: Lua: /usr/local/share/nvim/runtime/lua/vim/health.lua:498: command line..FileType Autocommands for "*"..function <SNR>1_LoadFTPlugin[20]..script /usr/local/share/nvim/runtime/ftplugin/checkhealth.lua: Vim(runtime):E5111: Lua: vim/loader.lua:0: EPERM: operation not permitted: /Users/niall/.cache/nvim/luac/0.000000usr0.000000local0.000000share0.000000nvim0.000000runtime0.000000ftplugin0.000000checkhealth.luac
+stack traceback:
+	[C]: in function 'assert'
+	vim/loader.lua: in function ''
+	vim/loader.lua: in function <vim/loader.lua:0>
+	[C]: in function 'setfiletype'
+	/usr/local/share/nvim/runtime/lua/vim/health.lua:498: in function '_check'
+	[string "<nvim>"]:1: in main chunk
+stack traceback:
+	[C]: in function 'setfiletype'
+	/usr/local/share/nvim/runtime/lua/vim/health.lua:498: in function '_check'
+	[string "<nvim>"]:1: in main chunk
+INF 2026-02-20T11:01:34.929 ?.34524    emsg_multiline:833: E886: System error while opening temporary ShaDa file /Users/niall/.local/state/nvim/shada/main.shada.tmp.a for writing: operation not permitted
+INF 2026-02-20T11:01:34.930 ?.34524    os_exit:693: Nvim exit: 0
+INF 2026-02-20T11:02:32.391 ?.36415    os_exit:693: Nvim exit: 0
