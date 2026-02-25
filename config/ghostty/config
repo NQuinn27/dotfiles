@@ -1,4 +1,4 @@
-theme = dark:Catppuccin-Mocha,light:Catppuccin-Frappe
+theme = dark:Catppuccin-Mocha,light:Catppuccin-Latte
 
 # Updates
 auto-update-channel = tip
