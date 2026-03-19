@@ -1,41 +1,55 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# # Create ~/.local/scripts directory if it doesn't exist
-mkdir -p ~/.local/scripts
-#
-# # Loop through all files in executables directory
-for script in .local/scripts/*; do
-  # Skip if it's a directory or a hidden file
-  if [ -f "$script" ] && [[ ! $(basename "$script") =~ ^\. ]]; then
-    # Get just the filename without the path
-    filename=$(basename "$script")
-    # Create symbolic link in ~/.local/scripts
-    ln -sf "$(pwd)/$script" ~/.local/scripts/"$filename"
-    # Make the original script executable
-    chmod +x "$(pwd)/$script"
-    # Make the symbolic link executable
-    chmod +x ~/.local/scripts/"$filename"
-    echo "Linked and made executable: $filename"
+set -euo pipefail
+
+repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+backup_suffix=".backup.$(date +%Y%m%d%H%M%S)"
+
+link_target() {
+  local source_path=$1
+  local target_path=$2
+  local current_target
+
+  mkdir -p "$(dirname "$target_path")"
+
+  if [ -L "$target_path" ]; then
+    current_target=$(readlink "$target_path")
+    if [ "$current_target" = "$source_path" ]; then
+      return 0
+    fi
+    rm -f "$target_path"
+  elif [ -e "$target_path" ]; then
+    mv "$target_path" "${target_path}${backup_suffix}"
+    echo "Backed up existing target: $target_path -> ${target_path}${backup_suffix}"
   fi
+
+  ln -s "$source_path" "$target_path"
+}
+
+mkdir -p "$HOME/.local/scripts" "$HOME/.config"
+
+for script in "$repo_root"/.local/scripts/*; do
+  [ -f "$script" ] || continue
+  filename=$(basename "$script")
+  [[ "$filename" =~ ^\. ]] && continue
+
+  chmod +x "$script"
+  link_target "$script" "$HOME/.local/scripts/$filename"
+  echo "Linked script: $filename"
 done
 
-# Loop through all items in config directory
-for config in config/*; do
-  # Skip if the glob didn't match
+for config in "$repo_root"/config/*; do
   [ -e "$config" ] || continue
-  # Skip .DS_Store files
-  [[ "$(basename "$config")" == ".DS_Store" ]] && continue
-  # Get just the filename without the path
   filename=$(basename "$config")
-  # Create symbolic link in ~/.config
-  ln -sf "$(pwd)/$config" ~/.config/"$filename"
-  echo "Linked to ~/.config: $filename"
+  [ "$filename" = ".DS_Store" ] && continue
+
+  link_target "$config" "$HOME/.config/$filename"
+  echo "Linked config: $filename"
 done
 
-# Loop through specific dotfiles to link to home directory
 for dotfile in .zshrc .p10k.zsh; do
-  ln -sf "$(pwd)/$dotfile" ~/"$dotfile"
-  echo "Linked to home: $dotfile"
+  link_target "$repo_root/$dotfile" "$HOME/$dotfile"
+  echo "Linked dotfile: $dotfile"
 done
 
-echo "Installation complete!"
+echo "Installation complete."

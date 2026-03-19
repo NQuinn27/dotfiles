@@ -14,9 +14,53 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+case "$(uname -s)" in
+  Darwin)
+    is_macos=true
+    is_linux=false
+    ;;
+  Linux)
+    is_macos=false
+    is_linux=true
+    ;;
+  *)
+    is_macos=false
+    is_linux=false
+    ;;
+esac
+
+kernel_release="$(uname -r 2>/dev/null)"
+if [[ "$is_linux" == true && "${kernel_release:l}" == *microsoft* ]]; then
+  is_wsl=true
+else
+  is_wsl=false
+fi
+
+path_prepend() {
+  local dir="$1"
+  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
+    export PATH="$dir:$PATH"
+  fi
+}
+
+path_append() {
+  local dir="$1"
+  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
+    export PATH="$PATH:$dir"
+  fi
+}
+
 # Plugins
-plugins=(git macos brew asdf zsh-autosuggestions zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
+plugins=(git asdf zsh-autosuggestions zsh-syntax-highlighting)
+if [[ "$is_macos" == true ]]; then
+  plugins+=(macos)
+fi
+if command -v brew >/dev/null 2>&1; then
+  plugins+=(brew)
+fi
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
 
 # ============================================================================
 # COMPLETION CONFIGURATION
@@ -49,7 +93,6 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax
 # ENVIRONMENT VARIABLES
 # ============================================================================
 export EDITOR="vim"
-export ANDROID_HOME=$HOME/Library/Android/sdk
 
 # FZF Configuration
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
@@ -77,18 +120,32 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # PATH CONFIGURATION
 # ============================================================================
 # Consolidate all PATH additions
-export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
+path_prepend "/usr/local/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+path_prepend "/opt/homebrew/opt/postgresql@15/bin"
+path_prepend "/usr/local/opt/postgresql@15/bin"
+path_append "$HOME/.local/scripts"
+path_append "${GOPATH:-$HOME/go}/bin"
 
-# Add latest Android build-tools dynamically
-if [ -d "$ANDROID_HOME/build-tools" ]; then
-  export PATH="$PATH:$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)"
-fi
+android_sdk_candidates=(
+  "$HOME/Library/Android/sdk"
+  "$HOME/Android/Sdk"
+)
 
-export PATH="$PATH:$HOME/.local/scripts"
-export PATH="$PATH:${GOPATH:-$HOME/go}/bin"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+for candidate in "${android_sdk_candidates[@]}"; do
+  if [[ -d "$candidate" ]]; then
+    export ANDROID_HOME="$candidate"
+    path_append "$ANDROID_HOME/platform-tools"
+
+    android_build_tools=("$ANDROID_HOME"/build-tools/*(N))
+    if (( ${#android_build_tools[@]} )); then
+      path_append "${android_build_tools[-1]}"
+    fi
+    break
+  fi
+done
+
 export GOPROXY=https://proxy.golang.org,direct
 
 # ============================================================================
@@ -143,8 +200,10 @@ alias ct="cargo test"
 alias cb="cargo build"
 
 # tailscale
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+if [[ "$is_macos" == true && -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]]; then
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+  alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
 
 # Grep
 alias grep="rg -uuu"
@@ -160,7 +219,9 @@ bindkey -s '^f' "tmux-sessionizer\n"
 # EXTERNAL INTEGRATIONS
 # ============================================================================
 # Homebrew
-eval $(/opt/homebrew/bin/brew shellenv)
+if command -v brew >/dev/null 2>&1; then
+  eval "$(brew shellenv)"
+fi
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -180,21 +241,26 @@ fi
 # Powerlevel10k theme customization
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 # opencode
-export PATH=/Users/niall/.opencode/bin:$PATH
+path_prepend "$HOME/.opencode/bin"
+
+conda_profile_candidates=(
+  "/opt/anaconda3/etc/profile.d/conda.sh"
+  "$HOME/miniconda3/etc/profile.d/conda.sh"
+  "$HOME/anaconda3/etc/profile.d/conda.sh"
+)
+
+if command -v conda >/dev/null 2>&1; then
+  __conda_setup="$(conda shell.zsh hook 2> /dev/null)"
+  if [[ -n "$__conda_setup" ]]; then
+    eval "$__conda_setup"
+  fi
+  unset __conda_setup
+else
+  for conda_profile in "${conda_profile_candidates[@]}"; do
+    if [[ -f "$conda_profile" ]]; then
+      . "$conda_profile"
+      break
+    fi
+  done
+fi

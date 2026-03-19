@@ -141,7 +141,9 @@ return {
 			)
 		end,
 		opts = function()
+			local platform = require("platform")
 			local dap, dapui = require("dap"), require("dapui")
+
 			require("dapui").setup()
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
@@ -156,25 +158,28 @@ return {
 				dapui.close()
 			end
 
-			-- Ruby
 			require("dap-ruby").setup()
-
-			-- Go
 			require("dap-go").setup()
 
-			-- Codelldb
 			local mason_registry = require("mason-registry")
 			if mason_registry.is_installed("codelldb") then
-				local codelldb_root = vim.fn.stdpath("data") .. "/mason/packages/codelldb"
-				local codelldb_path = codelldb_root .. "/extension/adapter/codelldb"
-				local liblldb_path = codelldb_root .. "/extension/lldb/lib/liblldb.dylib"
-				require("xcodebuild.integrations.dap").setup(codelldb_path)
-				vim.g.rustaceanvim = vim.g.rustaceanvim or {}
-				vim.g.rustaceanvim.dap = {
-					adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
-				}
+				local codelldb = platform.codelldb_paths()
+
+				if platform.readable(codelldb.adapter) and platform.readable(codelldb.liblldb) then
+					if platform.is_macos() then
+						local ok, xcode_dap = pcall(require, "xcodebuild.integrations.dap")
+						if ok then
+							xcode_dap.setup(codelldb.adapter)
+						end
+					end
+
+					vim.g.rustaceanvim = vim.g.rustaceanvim or {}
+					vim.g.rustaceanvim.dap = {
+						adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb.adapter, codelldb.liblldb),
+					}
+				end
 			end
-			-- setup dap config by VsCode launch.json file
+
 			local vscode = require("dap.ext.vscode")
 			local json = require("plenary.json")
 			vscode.json_decode = function(str)
@@ -182,7 +187,6 @@ return {
 			end
 		end,
 	},
-	-- which key integration
 	{
 		"folke/which-key.nvim",
 		optional = true,

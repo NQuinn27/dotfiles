@@ -1,4 +1,4 @@
-theme = dark:Catppuccin-Mocha,light:Catppuccin-Latte
+theme = dark:VSCode-Dark,light:VSCode-Light
 
 # Updates
 auto-update-channel = tip
