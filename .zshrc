@@ -1,84 +1,4 @@
 # ============================================================================
-# POWERLEVEL10K INSTANT PROMPT
-# ============================================================================
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# ============================================================================
-# OH MY ZSH CONFIGURATION
-# ============================================================================
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-case "$(uname -s)" in
-  Darwin)
-    is_macos=true
-    is_linux=false
-    ;;
-  Linux)
-    is_macos=false
-    is_linux=true
-    ;;
-  *)
-    is_macos=false
-    is_linux=false
-    ;;
-esac
-
-kernel_release="$(uname -r 2>/dev/null)"
-if [[ "$is_linux" == true && "${kernel_release:l}" == *microsoft* ]]; then
-  is_wsl=true
-else
-  is_wsl=false
-fi
-
-path_prepend() {
-  local dir="$1"
-  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
-    export PATH="$dir:$PATH"
-  fi
-}
-
-path_append() {
-  local dir="$1"
-  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
-    export PATH="$PATH:$dir"
-  fi
-}
-
-# Plugins
-plugins=(git asdf zsh-autosuggestions zsh-syntax-highlighting)
-if [[ "$is_macos" == true ]]; then
-  plugins+=(macos)
-fi
-if command -v brew >/dev/null 2>&1; then
-  plugins+=(brew)
-fi
-if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
-  source "$ZSH/oh-my-zsh.sh"
-fi
-
-# ============================================================================
-# COMPLETION CONFIGURATION
-# ============================================================================
-# Case-insensitive completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Colorful completion menu
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
-# Enable menu selection
-zstyle ':completion:*' menu select
-
-# Better completion for kill command
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
-
-# ============================================================================
 # ZSH OPTIONS
 # ============================================================================
 setopt AUTO_CD              # Go to folder path without using cd
@@ -122,29 +42,8 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # Consolidate all PATH additions
 path_prepend "/usr/local/bin"
 path_prepend "$HOME/.local/bin"
-path_prepend "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
-path_prepend "/opt/homebrew/opt/postgresql@15/bin"
-path_prepend "/usr/local/opt/postgresql@15/bin"
 path_append "$HOME/.local/scripts"
 path_append "${GOPATH:-$HOME/go}/bin"
-
-android_sdk_candidates=(
-  "$HOME/Library/Android/sdk"
-  "$HOME/Android/Sdk"
-)
-
-for candidate in "${android_sdk_candidates[@]}"; do
-  if [[ -d "$candidate" ]]; then
-    export ANDROID_HOME="$candidate"
-    path_append "$ANDROID_HOME/platform-tools"
-
-    android_build_tools=("$ANDROID_HOME"/build-tools/*(N))
-    if (( ${#android_build_tools[@]} )); then
-      path_append "${android_build_tools[-1]}"
-    fi
-    break
-  fi
-done
 
 export GOPROXY=https://proxy.golang.org,direct
 
@@ -233,34 +132,18 @@ if [ -f ~/.env ]; then
   set +o allexport
 fi
 
-# asdf Go plugin
-if [ -f "${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh" ]; then
-  . "${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh"
-fi
+# ===========================================================================
+# PLUGINS
+# ===========================================================================
 
-# Powerlevel10k theme customization
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/.antidote/antidote.zsh
+antidote load
 
-# opencode
-path_prepend "$HOME/.opencode/bin"
+. "$HOME/.cargo/env"
 
-conda_profile_candidates=(
-  "/opt/anaconda3/etc/profile.d/conda.sh"
-  "$HOME/miniconda3/etc/profile.d/conda.sh"
-  "$HOME/anaconda3/etc/profile.d/conda.sh"
-)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if command -v conda >/dev/null 2>&1; then
-  __conda_setup="$(conda shell.zsh hook 2> /dev/null)"
-  if [[ -n "$__conda_setup" ]]; then
-    eval "$__conda_setup"
-  fi
-  unset __conda_setup
-else
-  for conda_profile in "${conda_profile_candidates[@]}"; do
-    if [[ -f "$conda_profile" ]]; then
-      . "$conda_profile"
-      break
-    fi
-  done
-fi
+eval "$(starship init zsh)"

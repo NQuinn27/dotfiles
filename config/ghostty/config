@@ -1,4 +1,4 @@
-theme = dark:VSCode-Dark,light:VSCode-Light
+theme = dark:Gruvbox Dark Hard,light:Gruvbox Light Hard
 
 # Updates
 auto-update-channel = tip

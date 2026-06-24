@@ -6,7 +6,6 @@ return {
 			ensure_installed = {
 				-- Formatters
 				"stylua",
-				"rubocop",
 				"prettier",
 				"ruff",
 				"gofumpt",
@@ -29,7 +28,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				ruby = { "rubocop" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
 				typescript = { "prettier" },
@@ -64,7 +62,6 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				lua = { "luacheck" },
-				ruby = { "rubocop" },
 				javascript = { "eslint_d" },
 				javascriptreact = { "eslint_d" },
 				typescript = { "eslint_d" },

@@ -27,6 +27,20 @@ return {
 			},
 		},
 		keys = {
+			{
+				"<leader>e",
+				function()
+					require("snacks").explorer()
+				end,
+				desc = "Reveal Explorer",
+			},
+			{
+				"<leader>E",
+				function()
+					require("snacks").explorer.reveal()
+				end,
+				desc = "Reveal Explorer",
+			},
 			-- Top pickers
 			{
 				"<leader><space>",

@@ -1,5 +1,5 @@
 {
-  "auto-dark-mode.nvim": { "branch": "master", "commit": "e300259ec777a40b4b9e3c8e6ade203e78d15881" },
+  "auto-dark-mode.nvim": { "branch": "main", "commit": "e300259ec777a40b4b9e3c8e6ade203e78d15881" },
   "blink.cmp": { "branch": "main", "commit": "b19413d214068f316c78978b08264ed1c41830ec" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
   "catppuccin": { "branch": "main", "commit": "6efc53e42cfc97700f19043105bf73ba83c4ae7d" },
@@ -45,7 +45,7 @@
   "poetry-nvim": { "branch": "main", "commit": "2b5da914d73cb88f951c3d06e7ffab8e615a0f5e" },
   "roslyn.nvim": { "branch": "main", "commit": "4ce6030c82c40b2bee1b6ce1292121ef8354f3a6" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
-  "rustaceanvim": { "branch": "master", "commit": "50191da212fb867f8bf25ce5e00f55ffb7a7af8b" },
+  "rustaceanvim": { "branch": "main", "commit": "50191da212fb867f8bf25ce5e00f55ffb7a7af8b" },
   "showkeys": { "branch": "main", "commit": "cb0a50296f11f1e585acffba8c253b9e8afc1f84" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
   "telescope.nvim": { "branch": "master", "commit": "3333a52ff548ba0a68af6d8da1e54f9cd96e9179" },
