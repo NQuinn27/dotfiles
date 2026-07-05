@@ -1,7 +1,7 @@
 # ============================================================================
 # ZSH OPTIONS
 # ============================================================================
-setopt AUTO_CD              # Go to folder path without using cd
+# setopt AUTO_CD              # Go to folder path without using cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd
@@ -40,10 +40,11 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # PATH CONFIGURATION
 # ============================================================================
 # Consolidate all PATH additions
-path_prepend "/usr/local/bin"
-path_prepend "$HOME/.local/bin"
-path_append "$HOME/.local/scripts"
-path_append "${GOPATH:-$HOME/go}/bin"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/scripts"
+export PATH="$PATH:${GOPATH:-$HOME/go}/bin"
 
 export GOPROXY=https://proxy.golang.org,direct
 
@@ -147,3 +148,30 @@ export NVM_DIR="$HOME/.nvm"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
+zle-line-init() {
+  emulate -L zsh
+  [[ $CONTEXT == start ]] || return 0
+
+  while true; do
+    zle .recursive-edit
+    local -i ret=$?
+    [[ $ret == 0 && $KEYS == $'\4' ]] || break
+    [[ -o ignore_eof ]] || exit 0
+  done
+
+  local save_prompt=$PROMPT
+  local save_rprompt=$RPROMPT
+  PROMPT=$(starship module character)   # the transient (collapsed) prompt
+  RPROMPT=''
+  zle .reset-prompt
+  PROMPT=$save_prompt
+  RPROMPT=$save_rprompt
+
+  if (( ret )); then
+    zle .send-break
+  else
+    zle .accept-line
+  fi
+  return ret
+}
+zle -N zle-line-init

@@ -34,6 +34,9 @@ macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
 
 # Always show ghostty as the title
-title = ghostty
+# title = ghostty
 
 window-colorspace = display-p3
+
+# custom-shader=./shaders/retro.glsl
+# custom-shader-animation=always
