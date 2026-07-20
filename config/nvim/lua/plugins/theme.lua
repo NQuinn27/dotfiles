@@ -53,6 +53,11 @@ return {
 		},
 	},
 	{
+		"sainhhe/everforest",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"f-person/auto-dark-mode.nvim",
 		lazy = false,
 		priority = 1000,
