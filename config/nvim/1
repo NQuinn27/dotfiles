@@ -4,7 +4,7 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		opts = {
-			flavour = "mocha",
+			flavour = "macchiato",
 			dim_inactive = {
 				enabled = true, -- dims the background color of inactive window
 				shade = "dark",
@@ -60,7 +60,7 @@ return {
 			update_interval = 1000,
 			set_dark_mode = function()
 				vim.o.background = "dark"
-				vim.cmd.colorscheme("gruvbox")
+				vim.cmd.colorscheme("vscode")
 			end,
 			set_light_mode = function()
 				vim.o.background = "light"

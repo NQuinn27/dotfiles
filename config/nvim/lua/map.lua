@@ -38,8 +38,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>j", "<C-w>R", { desc = "Move window to the far right" })
 vim.keymap.set("n", "<leader>k", "<C-w>L", { desc = "Move window to the far left" })
 
-vim.keymap.set("n", "<leader>mdp", vim.cmd.MarkdownPreview, { desc = "Markdown preview", noremap = true, silent = true })
-
 -- Remap <C-d> to <C-d>zz
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half-page down and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half-page up and center" })

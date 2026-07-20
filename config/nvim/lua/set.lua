@@ -7,7 +7,7 @@ vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear search h
 vim.keymap.set("n", "<esc>", "<cmd>noh<CR>", { desc = "Clear search highlights" })
 
 -- [[ Core options ]]
-vim.opt.guicursor = ""
+vim.opt.guicursor = "a:block-blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,t:block-blinkwait700-blinkoff400-blinkon250-TermCursor"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
@@ -28,6 +28,19 @@ vim.opt.smartcase = true
 vim.opt.updatetime = 250
 vim.opt.winborder = "rounded"
 vim.opt.completeopt = "menuone,noselect"
+
+local function set_cursor_highlights()
+	vim.api.nvim_set_hl(0, "Cursor", { fg = "#f8f8f2", bg = "#2563eb" })
+	vim.api.nvim_set_hl(0, "lCursor", { fg = "#f8f8f2", bg = "#2563eb" })
+	vim.api.nvim_set_hl(0, "TermCursor", { fg = "#f8f8f2", bg = "#2563eb" })
+end
+
+set_cursor_highlights()
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("CursorHighlight", { clear = true }),
+	pattern = "*",
+	callback = set_cursor_highlights,
+})
 
 -- Don't auto-insert comment leaders when using `o`/`O`.
 vim.opt.formatoptions:remove("o")
