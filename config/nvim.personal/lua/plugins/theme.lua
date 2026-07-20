@@ -5,6 +5,10 @@ return {
 		priority = 1000,
 		opts = {
 			flavour = "macchiato",
+			background = { -- :h background
+				light = "latte",
+				dark = "macchiato",
+			},
 			dim_inactive = {
 				enabled = true, -- dims the background color of inactive window
 				shade = "dark",
@@ -53,18 +57,6 @@ return {
 		},
 	},
 	{
-		"sainnhe/everforest",
-		lazy = false,
-		priority = 1000,
-
-		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
-			vim.g.everforest_enable_italic = true
-			vim.g.everforest_background = "hard"
-		end,
-	},
-	{
 		"f-person/auto-dark-mode.nvim",
 		lazy = false,
 		priority = 1000,
@@ -72,11 +64,21 @@ return {
 			update_interval = 1000,
 			set_dark_mode = function()
 				vim.o.background = "dark"
-				vim.cmd.colorscheme("everforest")
+				vim.cmd.colorscheme("catppuccin")
+				-- require("vscode").load("dark")
+				-- -- Comments more prominent
+				-- vim.api.nvim_set_hl(0, "Normal", { bg = "#141415" })
+				-- vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#1E2021" })
+				-- vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#D7BA7D", bg = "none", nocombine = true })
+				-- vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#181818" })
+				-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E2021" })
+				-- vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#181818" })
+				-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181818" })
 			end,
 			set_light_mode = function()
 				vim.o.background = "light"
-				vim.cmd.colorscheme("everforest")
+				-- require("vscode").load("light")
+				vim.cmd.colorscheme("catppuccin")
 			end,
 		},
 	},
