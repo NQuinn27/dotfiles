@@ -1,4 +1,4 @@
-theme = dark:Everforest Dark Hard,light:Everforest Light Hard
+theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
 
 # Updates
 auto-update-channel = tip
