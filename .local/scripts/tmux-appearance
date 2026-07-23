@@ -1,10 +1,26 @@
-#!/bin/bash
-# Detects macOS appearance and sets tmux status bar background accordingly
+#!/usr/bin/env bash
+# Detects the system appearance and sets the tmux status bar background.
+# macOS reads AppleInterfaceStyle; Linux asks GNOME if it is present.
+# Anything undetectable falls back to dark rather than flashing a light bar
+# on a dark terminal.
 
-APPEARANCE=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+appearance=""
 
-if [ "$APPEARANCE" = "Dark" ]; then
-    tmux set -g status-style "bg=#181818"
-else
+if [ "$(uname)" = "Darwin" ]; then
+    if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -qi dark; then
+        appearance="Dark"
+    else
+        appearance="Light"
+    fi
+elif command -v gsettings >/dev/null 2>&1; then
+    case "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" in
+        *prefer-light*) appearance="Light" ;;
+        *prefer-dark*)  appearance="Dark" ;;
+    esac
+fi
+
+if [ "$appearance" = "Light" ]; then
     tmux set -g status-style "bg=#E8E8E8"
+else
+    tmux set -g status-style "bg=#181818"
 fi

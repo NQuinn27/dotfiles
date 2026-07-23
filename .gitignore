@@ -4,3 +4,65 @@
 .sessionizer-projects
 .chtsh-languages
 .chtsh-utils
+
+lazy-lock.json
+.envrc
+backups/
+
+.agents/skills/ui/
+
+# Python
+__pycache__/
+*.pyc
+
+# Plannotator runtime/state (keep config tracked)
+.plannotator/*
+!.plannotator/config.json
+
+# herdr runtime/state. ~/.config/herdr symlinks into this checkout, so herdr
+# writes logs, sockets and session state (which pane_history may fill with
+# secrets) straight into the repo. Allowlist, not denylist: anything new herdr
+# starts writing must stay out of git by default.
+config/herdr/*
+!config/herdr/config.toml
+
+# tmux plugins are installed by tpm at runtime, not tracked here.
+config/tmux/plugins/*
+!config/tmux/plugins/.gitkeep
+
+# Alternate nvim config; a LazyVim starter clone, not tracked here.
+config/nvim-lazy/
+
+# Editor / tool runtime noise (leaks local paths, usernames, kernel versions)
+*.log
+.nvimlog
+.write_probe_*
+
+.pi/agent/*
+.pi/todos/*
+.pi/.pi/todos/*
+.pi/todos
+
+# pi MCP adapter runtime/secrets
+.pi/agent/mcp-oauth/
+.pi/agent/mcp-cache.json
+.pi/agent/mcp-npx-cache.json
+.pi/agent/mcp-auth.json
+.local/share/pi/mcp-auth.json
+
+# pi extensions node_modules
+.pi/agent/extensions/**/node_modules/
+
+!.pi/agent/tsconfig.json
+!.pi/agent/package.json
+!.pi/agent/cloak.json
+!.pi/agent/themes/
+!.pi/agent/themes/*.json
+!.pi/agent/extensions/
+!.pi/agent/extensions/**
+!.pi/agent/mcp.json
+!.pi/agent/APPEND_SYSTEM.md
+!.pi/agent/skills/
+!.pi/agent/skills/**
+.pi/agent/skills/ui/
+.pi/agent/skills/account-id-tags/

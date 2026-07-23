@@ -1,0 +1,55 @@
+# Debian/Ubuntu provisioning for this checkout — the apt-installable half.
+#
+#   ./install.sh              # installs this, then the extras below
+#   ./install.sh --deps-only  # dependencies only
+#
+# Format: one package per line, '#' comments and blank lines ignored.
+#
+# NOT HERE, because apt does not carry a usable version (install.sh installs
+# these separately, see install_linux_extras):
+#
+#   neovim    Debian 12 ships 0.7.2, Ubuntu 24.04 ships 0.9.5; this config
+#             needs 0.10+ (vim.uv, current lazy.nvim). Installed from the
+#             official release tarball instead.
+#   starship  not packaged; installed via the official install script
+#   lazygit   not packaged; installed from the GitHub release
+#   eza       missing or stale depending on release; installed from GitHub
+#   antidote  not packaged; install.sh clones it (same as on macOS)
+#
+# Caveat: apt installs bat as `batcat` and fd as `fdfind` (name clashes with
+# other Debian packages). .zshrc aliases both back to their real names.
+
+# --- shell ---
+zsh
+zsh-syntax-highlighting
+
+# --- core workflow ---
+git
+tmux
+fzf
+ripgrep
+bat
+fd-find
+zoxide
+
+# --- build / runtime deps ---
+build-essential
+curl
+wget
+unzip
+ca-certificates
+
+# --- neovim build + plugin deps ---
+# luarocks: some nvim plugins build rocks; python3-venv: venv.nvim / providers
+luarocks
+python3
+python3-venv
+python3-pip
+
+# --- misc tooling ---
+# poppler-utils provides pdftotext etc. (poppler on macOS)
+poppler-utils
+# clipboard helpers: wl-clipboard for Wayland, xclip for X11. Both are safe to
+# have installed; nvim and the rust plugin pick whichever matches the session.
+wl-clipboard
+xclip

@@ -10,9 +10,22 @@ setopt CDABLE_VARS          # Change directory to a path stored in a variable
 setopt EXTENDED_GLOB        # Use extended globbing syntax
 
 # ============================================================================
+# PLATFORM DETECTION
+# ============================================================================
+if [[ "$OSTYPE" == darwin* ]]; then
+  is_macos=true
+else
+  is_macos=false
+fi
+
+# ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
-export EDITOR="vim"
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR="nvim"
+else
+  export EDITOR="vim"
+fi
 
 # FZF Configuration
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
@@ -40,7 +53,6 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # PATH CONFIGURATION
 # ============================================================================
 # Consolidate all PATH additions
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.local/scripts"
@@ -63,15 +75,29 @@ fcd() {
 alias zshconfig="vim ~/.zshrc"
 
 # Editor
-alias vim="nvim"
-alias vi="nvim"
+if command -v nvim >/dev/null 2>&1; then
+  alias vim="nvim"
+  alias vi="nvim"
+fi
 
-# File operations
-alias ls="eza"
-alias cat="bat"
+# File operations. Debian/Ubuntu install these as `batcat` and `fdfind` to
+# avoid name clashes, so fall back to those when the real names are absent.
+command -v eza >/dev/null 2>&1 && alias ls="eza"
+if command -v bat >/dev/null 2>&1; then
+  alias cat="bat"
+elif command -v batcat >/dev/null 2>&1; then
+  alias cat="batcat"
+  alias bat="batcat"
+fi
+if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
+  alias fd="fdfind"
+fi
 
-# Safety nets
-alias rm='rm -i'
+# Safety nets. Deliberately not aliasing `rm`: `rm -i` does not protect the
+# case that matters (`rm -rf` overrides it) and is absent in scripts and on
+# machines without these dotfiles, so it trains a reflex that does not hold.
+# Use `del` for recoverable deletes.
+command -v trash >/dev/null 2>&1 && alias del='trash'
 alias cp='cp -i'
 alias mv='mv -i'
 
@@ -91,7 +117,19 @@ alias gd='git diff'
 alias glog='git log --oneline --graph --all --decorate'
 alias greset="git reset --hard HEAD"
 alias gclean="git clean -fd"
-alias gpum="git fetch --all;git pull origin master"
+# Pull the repo's actual default branch, not a hardcoded "master".
+gpum() {
+  local remote=${1:-origin} branch
+  git fetch --all || return 1
+  branch=$(git symbolic-ref --quiet --short "refs/remotes/$remote/HEAD" 2>/dev/null)
+  branch=${branch#"$remote/"}
+  if [[ -z "$branch" ]]; then
+    print -u2 "gpum: could not determine default branch for '$remote'"
+    print -u2 "gpum: run: git remote set-head $remote --auto"
+    return 1
+  fi
+  git pull "$remote" "$branch"
+}
 
 # Development
 alias piru="pod install --repo-update"
@@ -105,10 +143,12 @@ if [[ "$is_macos" == true && -x "/Applications/Tailscale.app/Contents/MacOS/Tail
   alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
 
-# Grep
-alias grep="rg -uuu"
+# Search. `grep` is deliberately left alone: aliasing it to `rg -uuu` makes an
+# ordinary `grep -r secret .` read .env, .git/ and credential caches, which is
+# a leak waiting to happen. Use `rga` when you explicitly want everything.
+command -v rg >/dev/null 2>&1 && alias rga="rg -uuu"
 
-export MANPAGER="nvim +Man!"
+command -v nvim >/dev/null 2>&1 && export MANPAGER="nvim +Man!"
 
 # ============================================================================
 # KEY BINDINGS
@@ -126,6 +166,11 @@ fi
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zoxide
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 # .env integration
 if [ -f ~/.env ]; then
   set -o allexport
@@ -137,15 +182,36 @@ fi
 # PLUGINS
 # ===========================================================================
 
-source ~/.antidote/antidote.zsh
-antidote load
+if [ -f ~/.antidote/antidote.zsh ]; then
+  source ~/.antidote/antidote.zsh
+  antidote load
+fi
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zsh-syntax-highlighting. Location differs across Apple Silicon, Intel macOS
+# and Linux distros, so probe rather than hardcoding the Homebrew path.
+for _zsh_hl in \
+  "${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+  /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; do
+  if [ -f "$_zsh_hl" ]; then
+    source "$_zsh_hl"
+    break
+  fi
+done
+unset _zsh_hl
+
+if ! command -v starship >/dev/null 2>&1; then
+  # Minimal fallback prompt so a fresh machine is still usable.
+  PROMPT='%F{blue}%~%f %# '
+  return 0
+fi
 
 eval "$(starship init zsh)"
 zle-line-init() {
