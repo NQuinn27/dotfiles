@@ -16,7 +16,15 @@ if [ "$(uname)" = "Darwin" ]; then
     MODE="light"
   fi
 elif [ -z "$MODE" ]; then
-  MODE="dark"
+  # Linux: ask the desktop if there is one, otherwise default to dark.
+  if command -v gsettings >/dev/null 2>&1; then
+    scheme=$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)
+    case "$scheme" in
+      *prefer-light*) MODE="light" ;;
+      *prefer-dark*)  MODE="dark" ;;
+    esac
+  fi
+  : "${MODE:=dark}"
 fi
 
 if [ "$MODE" = "light" ]; then
