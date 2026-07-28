@@ -33,8 +33,10 @@ workspace_picker = ["prefix+s", "prefix+w"]
 new_workspace = "prefix+shift+n"
 rename_workspace = "prefix+shift+w"
 close_workspace = "prefix+shift+d"
-previous_workspace = "prefix+("
-next_workspace = "prefix+)"
+previous_workspace = "prefix+i"
+next_workspace = "prefix+o"
+next_agent = "prefix+u"
+previous_agent = "prefix+y"
 
 focus_agent = "prefix+alt+1..9"
 
