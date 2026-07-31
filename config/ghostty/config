@@ -1,4 +1,4 @@
-theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
+theme = Catppuccin Macchiato
 
 # Updates
 auto-update-channel = tip

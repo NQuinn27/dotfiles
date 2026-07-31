@@ -93,9 +93,19 @@ The apt path exists for machines where you do not want linuxbrew.
 
 - Homebrew for shell environment setup and any Homebrew-managed tools
 - Ghostty for the terminal config in `config/ghostty`
+- WezTerm for the cross-platform terminal config in `config/wezterm`
 - Tailscale app bundle if you want the `tailscale` / `ts` aliases
 - Conda if you rely on Python environments from Anaconda or Miniconda
 - Xcode / SourceKit / xcodebuild.nvim if you work on Swift projects
+
+### Windows
+
+WezTerm can load `config/wezterm/wezterm.lua` from
+`%USERPROFILE%\.config\wezterm\wezterm.lua`. The shell installer does not run
+on native Windows, so link or copy the directory there from a Windows checkout.
+When at least one WSL distribution is installed, the config opens the first
+discovered WezTerm WSL domain in its Linux home directory. It falls back to
+the Windows-local shell if WSL is unavailable.
 
 ### WSL / Linux
 

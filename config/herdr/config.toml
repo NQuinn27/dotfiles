@@ -8,8 +8,9 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-name = "cattpuccin"
+name = "catppuccin"
 
+auto_switch = false
 [theme.custom]
 # Catppuccin Macchiato-inspired overrides.
 panel_bg = "#24273a"

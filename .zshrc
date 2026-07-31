@@ -82,7 +82,7 @@ fi
 
 # File operations. Debian/Ubuntu install these as `batcat` and `fdfind` to
 # avoid name clashes, so fall back to those when the real names are absent.
-command -v eza >/dev/null 2>&1 && alias ls="eza"
+command -v eza >/dev/null 2>&1 && alias ls="eza --hyperlink=always"
 if command -v bat >/dev/null 2>&1; then
   alias cat="bat"
 elif command -v batcat >/dev/null 2>&1; then
