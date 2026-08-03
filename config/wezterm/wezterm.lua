@@ -51,6 +51,7 @@ config.colors = {
 	},
 }
 config.default_cursor_style = "BlinkingBlock"
+config.window_close_confirmation = "NeverPrompt"
 
 if is_macos then
 	-- Use WezTerm's integrated macOS title bar so its chrome follows the
