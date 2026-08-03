@@ -1,0 +1,39 @@
+{
+  "enabled": true,
+  "cloakCharacter": "*",
+  "cloakLength": null,
+  "tryAllPatterns": true,
+  "patterns": [
+    {
+      "filePattern": [
+        "**/*.env*",
+        "**/*.vars*"
+      ],
+      "cloakPattern": "(=).+",
+      "replace": "$1"
+    },
+    {
+      "filePattern": [
+        "**/auth.json",
+        "**/*credentials*.json"
+      ],
+      "cloakPattern": [
+        {
+          "pattern": "(\\\"(?:token|access|refresh|accessToken|refreshToken|apiKey|secret|password|clientSecret|idToken|sessionToken|authorization)\\\"\\s*:\\s*\\\")[^\\\"]+",
+          "replace": "$1",
+          "flags": "i"
+        }
+      ]
+    },
+    {
+      "filePattern": "**/*.toml",
+      "cloakPattern": [
+        {
+          "pattern": "((?:token|api_key|secret|password)\\s*=\\s*).+",
+          "replace": "$1",
+          "flags": "i"
+        }
+      ]
+    }
+  ]
+}

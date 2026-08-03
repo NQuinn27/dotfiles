@@ -147,7 +147,7 @@ install_links() {
     log "Linked config: $filename"
   done
 
-  for dotfile in .zshrc .zsh_plugins.txt; do
+  for dotfile in .pi .zshrc .zsh_plugins.txt; do
     link_target "$repo_root/$dotfile" "$HOME/$dotfile"
     log "Linked dotfile: $dotfile"
   done

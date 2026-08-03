@@ -1,0 +1,40 @@
+# Runtime credentials and local machine state. This is a second safety layer;
+# the repository root .gitignore also uses an explicit Pi config allowlist.
+agent/auth.json
+agent/auth.json.lock
+agent/models-store.json
+agent/trust.json
+agent/bin/
+agent/npm/
+agent/sessions/
+agent/state/
+agent/mcp-auth.json
+agent/mcp-cache.json
+agent/mcp-npx-cache.json
+agent/mcp-oauth/
+agent/extensions/.pi-subagents/
+
+# Dependencies, build output, and files that commonly carry credentials.
+agent/**/node_modules/
+agent/**/target/
+agent/**/dist/
+agent/**/out/
+agent/**/.env
+agent/**/.env.*
+agent/**/.envrc
+agent/**/*.pem
+agent/**/*.key
+agent/**/id_rsa*
+agent/**/*credential*
+agent/**/*secret*
+agent/**/.netrc
+agent/**/.npmrc
+
+# Pi runtime/backups outside agent/.
+backups/
+todos/
+.pi/
+
+# Local operating-system and tool noise.
+.DS_Store
+*.log

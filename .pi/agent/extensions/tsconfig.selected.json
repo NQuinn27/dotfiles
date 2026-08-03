@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "types": ["node"],
+    "verbatimModuleSyntax": true
+  },
+  "include": [
+    "auto-session-name.ts",
+    "effort.ts",
+    "file-search.ts",
+    "background-terminals/**/*.ts",
+    "copy-all/**/*.ts",
+    "continue-after-compaction.ts",
+    "git-info/**/*.ts",
+    "git-interceptor.ts",
+    "herdr-agent-state.ts",
+    "model-info/**/*.ts",
+    "pi-cloak/**/*.ts",
+    "save-md/**/*.ts",
+    "shared/**/*.ts",
+    "subagents/**/*.ts",
+    "summaries/**/*.ts",
+    "ui-customization/**/*.ts",
+    "whimsical.ts"
+  ],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/node_modules/**"]
+}
