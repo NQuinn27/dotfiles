@@ -4,6 +4,24 @@ local config = wezterm.config_builder()
 local is_macos = wezterm.target_triple:find("apple") ~= nil
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
+local function get_appearance()
+	-- The GUI module is unavailable when the config is evaluated by a mux
+	-- server. Preserve the existing dark theme in that context.
+	if wezterm.gui then
+		return wezterm.gui.get_appearance()
+	end
+
+	return "Dark"
+end
+
+local function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Macchiato"
+	end
+
+	return "Catppuccin Latte"
+end
+
 -- Match Ghostty with WezTerm's bundled JetBrains Mono and Nerd Font symbols,
 -- then fall back to a native monospace font for any remaining glyphs.
 local font_fallback = { "JetBrains Mono", "Symbols Nerd Font Mono" }
@@ -20,7 +38,7 @@ config.font = wezterm.font_with_fallback(font_fallback)
 config.font_size = 14
 config.line_height = 1.1
 
-config.color_scheme = "Catppuccin Macchiato"
+config.color_scheme = scheme_for_appearance(get_appearance())
 config.colors = {
 	cursor_fg = "#000000",
 	tab_bar = {
