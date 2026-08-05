@@ -5,9 +5,10 @@
         "servers": {
             "open-computer-use": {
                 "type": "local",
-                "command": [
-                    "open-computer-use",
-                    "mcp"
+                "command": "/bin/bash",
+                "args": [
+                    "-c",
+                    "exec \"$(npm root -g)/open-computer-use/dist/windows/amd64/open-computer-use.exe\" mcp"
                 ],
                 "enabled": true,
                 "timeout": 60000
