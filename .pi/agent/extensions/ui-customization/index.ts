@@ -4,6 +4,8 @@ import type {
   ExtensionAPI,
   ExtensionContext,
   ReadonlyFooterDataProvider,
+  Theme,
+  ThemeColor,
 } from "@earendil-works/pi-coding-agent";
 import {
   getCapabilities,
@@ -21,7 +23,6 @@ import {
   isModelInfoState,
 } from "../shared/dashboard-state.ts";
 
-type Rgb = [number, number, number];
 interface RenderableNode {
   children?: RenderableNode[];
   invalidate(): void;
@@ -32,15 +33,13 @@ interface DashboardTui extends RenderableNode {
   requestRender(force?: boolean): void;
 }
 
-const RESET = "\x1b[0m";
-const BOLD = "\x1b[1m";
-// Catppuccin Macchiato accents, limited to blues and purples.
-const PALETTE: Rgb[] = [
-  [125, 196, 228], // sapphire
-  [138, 173, 244], // blue
-  [183, 189, 248], // lavender
-  [198, 160, 246], // mauve
-];
+// Theme tokens that form a blue-to-purple gradient in both VS Code variants.
+const PALETTE = [
+  "syntaxType",
+  "accent",
+  "syntaxVariable",
+  "syntaxKeyword",
+] satisfies ThemeColor[];
 const TITLE_LINES = [
   "  ██████╗  ██╗ ",
   "  ██╔══██╗ ██║ ",
@@ -67,40 +66,29 @@ function sanitizeTerminalLabel(text: string) {
     .replace(/[\u0000-\u001f\u007f-\u009f]/g, "");
 }
 
-function mix(a: number, b: number, amount: number) {
-  return Math.round(a + (b - a) * amount);
-}
-
 function sampleGradient(position: number) {
   const wrapped = ((position % 1) + 1) % 1;
-  const scaled = wrapped * PALETTE.length;
-  const index = Math.floor(scaled);
-  const nextIndex = (index + 1) % PALETTE.length;
-  const amount = scaled - index;
-  const start = PALETTE[index]!;
-  const end = PALETTE[nextIndex]!;
-
-  return [
-    mix(start[0], end[0], amount),
-    mix(start[1], end[1], amount),
-    mix(start[2], end[2], amount),
-  ] satisfies Rgb;
+  return PALETTE[Math.floor(wrapped * PALETTE.length)]!;
 }
 
-function foreground([red, green, blue]: Rgb, text: string) {
-  return `\x1b[38;2;${red};${green};${blue}m${text}${RESET}`;
-}
-
-function gradientText(text: string, phase: number) {
+function gradientText(
+  text: string,
+  phase: number,
+  theme: Theme,
+  bold = false,
+) {
   const characters = [...text];
   const span = Math.max(characters.length - 1, 1);
 
   return characters
-    .map((character, index) =>
-      character === " "
-        ? character
-        : foreground(sampleGradient(index / span + phase), character),
-    )
+    .map((character, index) => {
+      if (character === " ") return character;
+      const styled = theme.fg(
+        sampleGradient(index / span + phase),
+        character,
+      );
+      return bold ? theme.bold(styled) : styled;
+    })
     .join("");
 }
 
@@ -219,7 +207,7 @@ export default function uiCustomization(pi: ExtensionAPI) {
   function install(ctx: ExtensionContext) {
     if (ctx.mode !== "tui") return;
 
-    ctx.ui.setHeader((tui) => {
+    ctx.ui.setHeader((tui, theme) => {
       activeTui = tui;
       requestRender = () => tui.requestRender();
       scheduleThemeRemoval(tui);
@@ -227,10 +215,10 @@ export default function uiCustomization(pi: ExtensionAPI) {
       return {
         render(width: number) {
           const art = TITLE_LINES.map((line, row) =>
-            center(gradientText(line, row * 0.045), width),
+            center(gradientText(line, row * 0.045, theme), width),
           );
           const subtitle = center(
-            `${BOLD}${gradientText(title, 0.18)}${RESET}`,
+            gradientText(title, 0.18, theme, true),
             width,
           );
           return ["", ...art, subtitle, ""];
