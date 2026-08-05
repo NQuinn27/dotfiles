@@ -8,17 +8,10 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-name = "catppuccin"
-
+# Herdr has no named VS Code theme. Its terminal theme follows the host's
+# vscode.nvim ANSI palette, including desktop light/dark changes.
+name = "one-dark"
 auto_switch = false
-[theme.custom]
-# Catppuccin Macchiato-inspired overrides.
-panel_bg = "#24273a"
-accent = "#c6a0f6"
-blue = "#8aadf4"
-green = "#a6da95"
-red = "#ed8796"
-yellow = "#eed49f"
 
 [keys]
 # Prefix: C-b
@@ -113,8 +106,6 @@ mouse_scroll_lines = 3
 # Close panes/tabs without prompting.
 confirm_close = false
 prompt_new_tab_name = true
-agent_panel_scope = "all"
-accent = "#c6a0f6"
 agent_panel_sort = "spaces"
 
 [ui.toast]

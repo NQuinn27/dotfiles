@@ -16,38 +16,46 @@ if [ "$(uname)" = "Darwin" ]; then
     MODE="light"
   fi
 elif [ -z "$MODE" ]; then
-  # Linux: ask the desktop if there is one, otherwise default to dark.
-  if command -v gsettings >/dev/null 2>&1; then
+  # WSL follows the Windows app theme; native Linux asks the desktop.
+  if [ -n "${WSL_INTEROP:-}" ] && command -v powershell.exe >/dev/null 2>&1; then
+    windows_light=$(powershell.exe -NoProfile -Command \
+      "(Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize').AppsUseLightTheme" \
+      2>/dev/null | tr -d '[:space:]')
+    case "$windows_light" in
+      1) MODE="light" ;;
+      0) MODE="dark" ;;
+    esac
+  elif command -v gsettings >/dev/null 2>&1; then
     scheme=$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)
     case "$scheme" in
-      *prefer-light*) MODE="light" ;;
-      *prefer-dark*)  MODE="dark" ;;
+      *prefer-light*|*default*) MODE="light" ;;
+      *prefer-dark*)           MODE="dark" ;;
     esac
   fi
   : "${MODE:=dark}"
 fi
 
 if [ "$MODE" = "light" ]; then
-  # vscode-light
-  BG="#f8f8f8"          # background
-  FG="#000000"          # foreground
-  MUTED="#555555"       # palette 7 (dim)
-  ACCENT="#0451a5"      # palette 4 (blue)
-  ACCENT_FG="#f8f8f8"
-  ACTIVE_BG="#add6ff"   # selection-background
-  ACTIVE_FG="#000000"   # selection-foreground
-  BORDER="#c0c0c0"
-  ACTIVE_BORDER="#0451a5"
+  # vscode.nvim light palette
+  BG="#ffffff"          # vscBack
+  FG="#343434"          # vscFront
+  MUTED="#767676"       # vscCursorLight
+  ACCENT="#007acc"      # vscDarkBlue
+  ACCENT_FG="#ffffff"
+  ACTIVE_BG="#add6ff"   # vscSelection
+  ACTIVE_FG="#000000"
+  BORDER="#dddddd"      # vscSplitDark
+  ACTIVE_BORDER="#007acc"
 else
-  # vscode-dark
-  BG="#181818"          # background
-  FG="#cccccc"          # foreground
-  MUTED="#6a6a6a"       # palette 8 (dim)
-  ACCENT="#569cd6"      # palette 4 (blue)
-  ACCENT_FG="#1e1e1e"
-  ACTIVE_BG="#264f78"   # selection-background
-  ACTIVE_FG="#ffffff"   # selection-foreground
-  BORDER="#333333"
+  # vscode.nvim dark palette
+  BG="#1f1f1f"          # vscBack
+  FG="#d4d4d4"          # vscFront
+  MUTED="#808080"       # vscGray
+  ACCENT="#569cd6"      # vscBlue
+  ACCENT_FG="#1f1f1f"
+  ACTIVE_BG="#264f78"   # vscSelection
+  ACTIVE_FG="#ffffff"
+  BORDER="#444444"      # vscSplitDark
   ACTIVE_BORDER="#569cd6"
 fi
 

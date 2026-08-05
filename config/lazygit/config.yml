@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+# Use the host terminal's VS Code ANSI palette so this follows dark/light mode.
+gui:
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    inactiveBorderColor:
+      - default
+    searchingActiveBorderColor:
+      - cyan
+      - bold
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - reverse
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - cyan
+    cherryPickedCommitBgColor:
+      - default
+    markedBaseCommitFgColor:
+      - yellow
+    markedBaseCommitBgColor:
+      - default
+    unstagedChangesColor:
+      - red
+    defaultFgColor:
+      - default

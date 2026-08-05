@@ -1,22 +1,30 @@
+# vi: ft=conf :
+# Source: https://github.com/Mofiqul/vscode.nvim/tree/main/extra/ghostty
+
+# normal colors
 palette = 0=#000000
-palette = 1=#cd3131
-palette = 2=#00bc00
-palette = 3=#949800
-palette = 4=#0451a5
-palette = 5=#bc05bc
-palette = 6=#0598bc
-palette = 7=#555555
-palette = 8=#666666
-palette = 9=#cd3131
-palette = 10=#14ce14
-palette = 11=#b5ba00
-palette = 12=#0451a5
-palette = 13=#bc05bc
-palette = 14=#0598bc
-palette = 15=#a5a5a5
-background = F8F8F8
-foreground = 000000
-cursor-color = 000000
-cursor-text = ffffff
-selection-background = add6ff
-selection-foreground = 000000
+palette = 1=#C72E0F
+palette = 2=#008000
+palette = 3=#795E25
+palette = 4=#007ACC
+palette = 5=#AF00DB
+palette = 6=#56B6C2
+palette = 7=#000000
+
+# bright colors
+palette = 8=#808080
+palette = 9=#C72E0F
+palette = 10=#008000
+palette = 11=#795E25
+palette = 12=#007ACC
+palette = 13=#AF00DB
+palette = 14=#56B6C2
+palette = 15=#000000
+
+background = #FFFFFF
+foreground = #000000
+cursor-color = #000000
+cursor-text = #FFFFFF
+
+selection-background = #ADD6FF
+selection-foreground = #000000

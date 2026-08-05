@@ -50,7 +50,12 @@ return {
 			italic_comments = true,
 			underline_links = true,
 			disable_nvimtree_bg = false,
+			terminal_colors = true,
 		},
+		config = function(_, opts)
+			require("vscode").setup(opts)
+			vim.cmd.colorscheme("vscode")
+		end,
 	},
 	{
 		"sainnhe/everforest",
@@ -72,11 +77,11 @@ return {
 			update_interval = 1000,
 			set_dark_mode = function()
 				vim.o.background = "dark"
-				vim.cmd.colorscheme("catppuccin")
+				vim.cmd.colorscheme("vscode")
 			end,
 			set_light_mode = function()
 				vim.o.background = "light"
-				vim.cmd.colorscheme("catppuccin")
+				vim.cmd.colorscheme("vscode")
 			end,
 		},
 	},

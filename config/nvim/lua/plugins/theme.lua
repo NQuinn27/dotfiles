@@ -1,22 +1,35 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "Mofiqul/vscode.nvim",
+    lazy = false,
     priority = 1000,
     opts = {
-      flavour = "macchiato",
-      dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
-      },
-      term_colors = true,
+      transparent = false,
+      italic_comments = true,
+      underline_links = true,
+      disable_nvimtree_bg = false,
+      terminal_colors = true,
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-macchiato",
+      colorscheme = "vscode",
+    },
+  },
+  {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      fallback = "dark",
+      update_interval = 3000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option_value("background", "dark", {})
+        vim.cmd.colorscheme("vscode")
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option_value("background", "light", {})
+        vim.cmd.colorscheme("vscode")
+      end,
     },
   },
 }

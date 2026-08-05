@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
+local vscode_dark = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/vscode-dark.toml")
+local vscode_light = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/vscode-light.toml")
 local is_macos = wezterm.target_triple:find("apple") ~= nil
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
@@ -14,12 +16,56 @@ local function get_appearance()
 	return "Dark"
 end
 
+local function is_dark(appearance)
+	return appearance:find("Dark") ~= nil
+end
+
 local function scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Macchiato"
+	if is_dark(appearance) then
+		return "vscode-dark"
 	end
 
-	return "Catppuccin Latte"
+	return "vscode-light"
+end
+
+local function tab_bar_for_appearance(appearance)
+	if is_dark(appearance) then
+		return {
+			background = "#1f1f1f",
+			active_tab = { bg_color = "#264f78", fg_color = "#ffffff", intensity = "Bold" },
+			inactive_tab = { bg_color = "#252526", fg_color = "#bbbbbb" },
+			inactive_tab_hover = { bg_color = "#373737", fg_color = "#d4d4d4", intensity = "Bold" },
+			new_tab = { bg_color = "#1f1f1f", fg_color = "#569cd6" },
+			new_tab_hover = { bg_color = "#373737", fg_color = "#4ec9b0", intensity = "Bold" },
+		}
+	end
+
+	return {
+		background = "#ffffff",
+		active_tab = { bg_color = "#add6ff", fg_color = "#000000", intensity = "Bold" },
+		inactive_tab = { bg_color = "#e8e8e8", fg_color = "#343434" },
+		inactive_tab_hover = { bg_color = "#f3f3f3", fg_color = "#000000", intensity = "Bold" },
+		new_tab = { bg_color = "#ffffff", fg_color = "#0451a5" },
+		new_tab_hover = { bg_color = "#e5e5e5", fg_color = "#16825d", intensity = "Bold" },
+	}
+end
+
+local function window_frame_for_appearance(appearance)
+	if is_dark(appearance) then
+		return {
+			active_titlebar_bg = "#252526",
+			active_titlebar_fg = "#d4d4d4",
+			inactive_titlebar_bg = "#1f1f1f",
+			inactive_titlebar_fg = "#808080",
+		}
+	end
+
+	return {
+		active_titlebar_bg = "#e8e8e8",
+		active_titlebar_fg = "#343434",
+		inactive_titlebar_bg = "#ffffff",
+		inactive_titlebar_fg = "#767676",
+	}
 end
 
 -- Match Ghostty with WezTerm's bundled JetBrains Mono and Nerd Font symbols,
@@ -35,54 +81,29 @@ else
 end
 
 config.font = wezterm.font_with_fallback(font_fallback)
-config.font_size = 14
+config.font_size = 10
 config.line_height = 1.1
 
-config.color_scheme = scheme_for_appearance(get_appearance())
+local appearance = get_appearance()
+config.color_schemes = {
+	["vscode-dark"] = vscode_dark,
+	["vscode-light"] = vscode_light,
+}
+config.color_scheme = scheme_for_appearance(appearance)
 config.colors = {
-	cursor_fg = "#000000",
-	tab_bar = {
-		background = "#1e2030",
-		active_tab = {
-			bg_color = "#c6a0f6",
-			fg_color = "#181926",
-			intensity = "Bold",
-		},
-		inactive_tab = {
-			bg_color = "#24273a",
-			fg_color = "#a5adce",
-		},
-		inactive_tab_hover = {
-			bg_color = "#363a4f",
-			fg_color = "#cad3f5",
-			intensity = "Bold",
-		},
-		new_tab = {
-			bg_color = "#1e2030",
-			fg_color = "#c6a0f6",
-		},
-		new_tab_hover = {
-			bg_color = "#363a4f",
-			fg_color = "#a6da95",
-			intensity = "Bold",
-		},
-	},
+	cursor_fg = is_dark(appearance) and "#1f1f1f" or "#ffffff",
+	tab_bar = tab_bar_for_appearance(appearance),
 }
 config.default_cursor_style = "BlinkingBlock"
 config.window_close_confirmation = "NeverPrompt"
 
 if is_macos then
 	-- Use WezTerm's integrated macOS title bar so its chrome follows the
-	-- Catppuccin Macchiato base palette instead of the system window color.
+	-- active VS Code palette instead of the system window color.
 	config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 	-- Keep the first terminal line below the macOS traffic-light controls.
 	config.window_padding = { top = 32 }
-	config.window_frame = {
-		active_titlebar_bg = "#24273a",
-		active_titlebar_fg = "#cad3f5",
-		inactive_titlebar_bg = "#1e2030",
-		inactive_titlebar_fg = "#a5adce",
-	}
+	config.window_frame = window_frame_for_appearance(appearance)
 end
 
 -- Ghostty fades inactive splits to 97% opacity. WezTerm's closest equivalent
@@ -143,7 +164,9 @@ local function is_shell(foreground_process_name)
 	local process = string.match(foreground_process_name, "[^/\\]+$") or foreground_process_name
 
 	for _, shell in ipairs(shell_names) do
-		if process == shell then return true end
+		if process == shell then
+			return true
+		end
 	end
 
 	return false
@@ -189,8 +212,7 @@ wezterm.on("open-uri", function(_, pane, uri)
 				end
 			end
 		else
-			local edit_cmd = url.fragment and editor .. ' +' .. url.fragment .. ' "$_f"'
-				or editor .. ' "$_f"'
+			local edit_cmd = url.fragment and editor .. " +" .. url.fragment .. ' "$_f"' or editor .. ' "$_f"'
 			local cmd = '_f="'
 				.. url.file_path
 				.. '"; { test -d "$_f" && { cd "$_f" ; ls -a -p --hyperlink --group-directories-first; }; } '
