@@ -147,6 +147,16 @@ install_links() {
     log "Linked config: $filename"
   done
 
+  # Bat and Lazygit use Application Support on macOS unless XDG_CONFIG_HOME is
+  # set. Link their native locations too without changing every app's XDG paths.
+  if is_macos; then
+    for config in bat lazygit; do
+      [ -d "$repo_root/config/$config" ] || continue
+      link_target "$repo_root/config/$config" "$HOME/Library/Application Support/$config"
+      log "Linked config: $config (macOS native path)"
+    done
+  fi
+
   for dotfile in .pi .zshrc .zsh_plugins.txt; do
     link_target "$repo_root/$dotfile" "$HOME/$dotfile"
     log "Linked dotfile: $dotfile"
@@ -477,9 +487,62 @@ install_tmux_plugins() {
   trap - EXIT INT TERM
 }
 
+install_bat_themes() {
+  local bat_bin=""
+
+  if have bat; then
+    bat_bin=$(command -v bat)
+  elif have batcat; then
+    bat_bin=$(command -v batcat)
+  else
+    return 0
+  fi
+
+  [ -d "$("$bat_bin" --config-dir 2>/dev/null)/themes" ] || return 0
+
+  if "$bat_bin" cache --build >/dev/null 2>&1; then
+    log "Built bat theme cache"
+  else
+    warn "bat theme cache build failed; run '$bat_bin cache --build' manually"
+  fi
+}
+
+install_pi_extension_dependencies() {
+  local extensions_dir="$repo_root/.pi/agent/extensions"
+  local package_dir
+
+  [ -d "$extensions_dir" ] || return 0
+
+  if ! have npm; then
+    warn "npm is not installed; Pi extensions with npm dependencies may not load"
+    return 0
+  fi
+
+  for package_dir in "$extensions_dir" "$extensions_dir"/*; do
+    [ -f "$package_dir/package.json" ] || continue
+    node -e 'const p = require(process.argv[1]); process.exit(Object.keys(p.dependencies ?? {}).length ? 0 : 1)' \
+      "$package_dir/package.json" || continue
+
+    if (cd "$package_dir" && npm ls --depth=0 >/dev/null 2>&1); then
+      log "Pi extension dependencies already installed: $(basename "$package_dir")"
+      continue
+    fi
+
+    if [ ! -f "$package_dir/package-lock.json" ]; then
+      warn "Pi extension package has no lockfile; skipping: $package_dir"
+      continue
+    fi
+
+    log "Installing Pi extension dependencies: $(basename "$package_dir")"
+    (cd "$package_dir" && npm ci --no-audit --no-fund) ||
+      warn "Pi extension dependency install failed: $package_dir"
+  done
+}
+
 install_deps() {
   install_homebrew_packages
   install_linux_packages
+  install_pi_extension_dependencies
 
   clone_once https://github.com/mattmc3/antidote.git \
     "$HOME/.antidote" "antidote (zsh plugin manager)"
@@ -505,5 +568,9 @@ fi
 if [ "$skip_deps" = false ]; then
   install_deps
 fi
+
+# Theme assets may have been linked by --skip-deps, or bat may just have been
+# installed above. Rebuild whenever both the binary and custom themes exist.
+install_bat_themes
 
 log "Installation complete."
