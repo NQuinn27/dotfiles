@@ -27,10 +27,36 @@ else
   export EDITOR="vim"
 fi
 
-# FZF Configuration
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+# FZF Configuration. These colors come from vscode.nvim's fzf extras; choose
+# the variant once per shell so the picker follows the desktop appearance.
+_fzf_vscode_mode=dark
+if [[ "$is_macos" == true ]]; then
+  defaults read -g AppleInterfaceStyle >/dev/null 2>&1 || _fzf_vscode_mode=light
+elif [[ -n "${WSL_INTEROP:-}" ]] && command -v powershell.exe >/dev/null 2>&1; then
+  _fzf_windows_light=$(powershell.exe -NoProfile -Command \
+    "(Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize').AppsUseLightTheme" \
+    2>/dev/null | tr -d '[:space:]')
+  [[ "$_fzf_windows_light" == 1 ]] && _fzf_vscode_mode=light
+elif command -v gsettings >/dev/null 2>&1; then
+  _fzf_linux_scheme=$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)
+  if [[ "$_fzf_linux_scheme" == *prefer-light* || "$_fzf_linux_scheme" == *default* ]]; then
+    _fzf_vscode_mode=light
+  fi
+fi
+
+if [[ "$_fzf_vscode_mode" == light ]]; then
+  _fzf_vscode_colors='--color=fg:#000000,fg+:#000000,bg:#ffffff,bg+:#f3f3f3,hl:#008000,hl+:#af00db,info:#af00db,marker:#af00db,prompt:#af00db,spinner:#af00db,pointer:#af00db,header:#008000,border:#000000,label:#af00db,query:#000000'
+  export BAT_THEME="Visual Studio Light+"
+else
+  _fzf_vscode_colors='--color=fg:#d4d4d4,fg+:#d4d4d4,bg:#1f1f1f,bg+:#222222,hl:#608b4e,hl+:#c586c0,info:#c586c0,marker:#c586c0,prompt:#c586c0,spinner:#c586c0,pointer:#c586c0,header:#608b4e,border:#808080,label:#c586c0,query:#d4d4d4'
+  # bat bundles Microsoft's VS Code-compatible dark syntax theme.
+  export BAT_THEME="Visual Studio Dark+"
+fi
+
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border $_fzf_vscode_colors"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+unset _fzf_vscode_colors _fzf_vscode_mode _fzf_windows_light _fzf_linux_scheme
 
 # ============================================================================
 # HISTORY CONFIGURATION
