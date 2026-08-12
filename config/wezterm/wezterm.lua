@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 local vscode_dark = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/vscode-dark.toml")
-local vscode_light = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/vscode-light.toml")
+local rose_pine_dawn = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/rose-pine-dawn.toml")
 local is_macos = wezterm.target_triple:find("apple") ~= nil
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
@@ -25,7 +25,7 @@ local function scheme_for_appearance(appearance)
 		return "vscode-dark"
 	end
 
-	return "vscode-light"
+	return "rose-pine-dawn"
 end
 
 local function tab_bar_for_appearance(appearance)
@@ -41,12 +41,12 @@ local function tab_bar_for_appearance(appearance)
 	end
 
 	return {
-		background = "#ffffff",
-		active_tab = { bg_color = "#add6ff", fg_color = "#000000", intensity = "Bold" },
-		inactive_tab = { bg_color = "#e8e8e8", fg_color = "#343434" },
-		inactive_tab_hover = { bg_color = "#f3f3f3", fg_color = "#000000", intensity = "Bold" },
-		new_tab = { bg_color = "#ffffff", fg_color = "#0451a5" },
-		new_tab_hover = { bg_color = "#e5e5e5", fg_color = "#16825d", intensity = "Bold" },
+		background = "#faf4ed",
+		active_tab = { bg_color = "#dfdad9", fg_color = "#575279", intensity = "Bold" },
+		inactive_tab = { bg_color = "#f2e9e1", fg_color = "#797593" },
+		inactive_tab_hover = { bg_color = "#f4ede8", fg_color = "#575279", intensity = "Bold" },
+		new_tab = { bg_color = "#faf4ed", fg_color = "#286983" },
+		new_tab_hover = { bg_color = "#f2e9e1", fg_color = "#56949f", intensity = "Bold" },
 	}
 end
 
@@ -61,10 +61,10 @@ local function window_frame_for_appearance(appearance)
 	end
 
 	return {
-		active_titlebar_bg = "#e8e8e8",
-		active_titlebar_fg = "#343434",
-		inactive_titlebar_bg = "#ffffff",
-		inactive_titlebar_fg = "#767676",
+		active_titlebar_bg = "#f2e9e1",
+		active_titlebar_fg = "#575279",
+		inactive_titlebar_bg = "#faf4ed",
+		inactive_titlebar_fg = "#9893a5",
 	}
 end
 
@@ -87,11 +87,11 @@ config.line_height = 1.1
 local appearance = get_appearance()
 config.color_schemes = {
 	["vscode-dark"] = vscode_dark,
-	["vscode-light"] = vscode_light,
+	["rose-pine-dawn"] = rose_pine_dawn,
 }
 config.color_scheme = scheme_for_appearance(appearance)
 config.colors = {
-	cursor_fg = is_dark(appearance) and "#1f1f1f" or "#ffffff",
+	cursor_fg = is_dark(appearance) and "#1f1f1f" or "#faf4ed",
 	tab_bar = tab_bar_for_appearance(appearance),
 }
 config.default_cursor_style = "BlinkingBlock"
@@ -99,11 +99,14 @@ config.window_close_confirmation = "NeverPrompt"
 
 if is_macos then
 	-- Use WezTerm's integrated macOS title bar so its chrome follows the
-	-- active VS Code palette instead of the system window color.
+	-- active palette instead of the system window color.
 	config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 	-- Keep the first terminal line below the macOS traffic-light controls.
 	config.window_padding = { top = 32 }
 	config.window_frame = window_frame_for_appearance(appearance)
+elseif is_windows then
+	-- Keep the native Windows title bar and resize border available.
+	config.window_decorations = "TITLE|RESIZE"
 end
 
 -- Ghostty fades inactive splits to 97% opacity. WezTerm's closest equivalent

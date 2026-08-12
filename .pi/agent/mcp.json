@@ -8,7 +8,7 @@
                 "command": "/bin/bash",
                 "args": [
                     "-c",
-                    "exec \"$(npm root -g)/open-computer-use/dist/windows/amd64/open-computer-use.exe\" mcp"
+                    "if [ -n \"${WSL_INTEROP:-}\" ] || grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null; then case \"$(uname -m)\" in x86_64|amd64) arch=amd64 ;; aarch64|arm64) arch=arm64 ;; *) echo \"open-computer-use: unsupported WSL architecture: $(uname -m)\" >&2; exit 1 ;; esac; exec \"$(npm root -g)/open-computer-use/dist/windows/$arch/open-computer-use.exe\" mcp; else exec open-computer-use mcp; fi"
                 ],
                 "enabled": true,
                 "timeout": 60000

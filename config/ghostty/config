@@ -1,5 +1,6 @@
-# Follow the desktop appearance using vscode.nvim's bundled Ghostty extras.
-theme = light:vscode-light,dark:vscode-dark
+# Follow the desktop appearance, matching Neovim: vscode.nvim in dark,
+# rose-pine-dawn in light.
+theme = light:rose-pine-dawn,dark:vscode-dark
 
 # Updates
 auto-update-channel = tip

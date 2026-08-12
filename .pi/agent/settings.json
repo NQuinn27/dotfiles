@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.83.0",
-  "theme": "vscode-light/vscode-dark",
+  "theme": "rose-pine-dawn/vscode-dark",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "xhigh",
   "enabledModels": [
     "openai-codex/gpt-5.6-sol",
     "openai-codex/gpt-5.6-terra",

@@ -29,7 +29,7 @@ elif command -v gsettings >/dev/null 2>&1; then
 fi
 
 if [ "$appearance" = "Light" ]; then
-    tmux set -g status-style "bg=#FFFFFF"
+    tmux set -g status-style "bg=#FAF4ED"
 else
     tmux set -g status-style "bg=#1F1F1F"
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
-# Apply a tmux status theme matching Ghostty's vscode-dark / vscode-light themes
-# (see ~/.config/ghostty/themes/vscode-{dark,light}). Pass "dark" or "light";
-# with no argument, detect the current macOS appearance.
+# Apply a tmux status theme matching the terminal's themes: vscode-dark in dark
+# mode and rose-pine-dawn in light (see ~/.config/ghostty/themes/). Pass "dark"
+# or "light"; with no argument, detect the current macOS appearance.
 
 MODE="$1"
 
@@ -36,16 +36,16 @@ elif [ -z "$MODE" ]; then
 fi
 
 if [ "$MODE" = "light" ]; then
-  # vscode.nvim light palette
-  BG="#ffffff"          # vscBack
-  FG="#343434"          # vscFront
-  MUTED="#767676"       # vscCursorLight
-  ACCENT="#007acc"      # vscDarkBlue
-  ACCENT_FG="#ffffff"
-  ACTIVE_BG="#add6ff"   # vscSelection
-  ACTIVE_FG="#000000"
-  BORDER="#dddddd"      # vscSplitDark
-  ACTIVE_BORDER="#007acc"
+  # rose-pine-dawn palette
+  BG="#faf4ed"          # base
+  FG="#575279"          # text
+  MUTED="#797593"       # subtle
+  ACCENT="#286983"      # pine
+  ACCENT_FG="#faf4ed"
+  ACTIVE_BG="#dfdad9"   # highlight med
+  ACTIVE_FG="#575279"
+  BORDER="#cecacd"      # highlight high
+  ACTIVE_BORDER="#286983"
 else
   # vscode.nvim dark palette
   BG="#1f1f1f"          # vscBack

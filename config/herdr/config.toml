@@ -8,10 +8,13 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-# Herdr has no named VS Code theme. Its terminal theme follows the host's
-# vscode.nvim ANSI palette, including desktop light/dark changes.
+# Herdr has no named VS Code theme, so one-dark is the closest built-in match
+# for the vscode.nvim dark palette. Light mode uses rose-pine-dawn to match
+# Neovim, Ghostty, and WezTerm.
 name = "one-dark"
 auto_switch = false
+light_name = "rose-pine-dawn"
+dark_name = "one-dark"
 
 [keys]
 # Prefix: C-b
@@ -106,7 +109,7 @@ mouse_scroll_lines = 3
 # Close panes/tabs without prompting.
 confirm_close = false
 prompt_new_tab_name = true
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 
 [ui.toast]
 delivery = "herdr"
